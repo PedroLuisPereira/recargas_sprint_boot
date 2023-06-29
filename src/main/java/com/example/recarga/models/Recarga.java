@@ -22,6 +22,9 @@ public class Recarga {
     @Column(name = "valor", nullable = false)
     private double valor;
 
+    @Column(name = "celular", nullable = false)
+    private String celular;
+
     @Column(name = "operador", nullable = false)
     private String operador;
 
@@ -70,11 +73,20 @@ public class Recarga {
         this.persona = persona;
     }
 
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
     @Override
     public String toString() {
         return "Recarga{" +
                 "id=" + id +
                 ", valor=" + valor +
+                ", celular='" + celular + '\'' +
                 ", operador='" + operador + '\'' +
                 ", persona=" + persona +
                 '}';

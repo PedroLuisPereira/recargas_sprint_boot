@@ -47,6 +47,7 @@ public class RecargaController {
 
         Recarga recarga = new Recarga();
         recarga.setValor(recargaDto.getValor());
+        recarga.setCelular(recargaDto.getCelular());
         recarga.setOperador(recargaDto.getOperador());
         recarga.setPersona(persona);
 

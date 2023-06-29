@@ -5,11 +5,13 @@ public class RecargaDto {
 
     private Long id;
     private double valor;
+    private String celular;
     private String operador;
     private Long persona_id;
 
-    public RecargaDto(double valor, String operador, Long persona_id) {
+    public RecargaDto(double valor, String celular, String operador, Long persona_id) {
         this.valor = valor;
+        this.celular = celular;
         this.operador = operador;
         this.persona_id = persona_id;
     }
@@ -50,11 +52,22 @@ public class RecargaDto {
         this.persona_id = persona_id;
     }
 
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
 
     @Override
     public String toString() {
-        return "RecargaDto [id=" + id + ", valor=" + valor + ", operador=" + operador + ", persona_id=" + persona_id
-                + "]";
+        return "RecargaDto{" +
+                "id=" + id +
+                ", valor=" + valor +
+                ", celular='" + celular + '\'' +
+                ", operador='" + operador + '\'' +
+                ", persona_id=" + persona_id +
+                '}';
     }
-
 }
