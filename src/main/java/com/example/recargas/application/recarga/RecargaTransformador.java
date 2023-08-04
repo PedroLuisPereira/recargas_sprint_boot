@@ -27,6 +27,6 @@ public class RecargaTransformador {
         recarga.getValor(),
         recarga.getCelular(),
         recarga.getOperador(),
-        recarga.getPersonaId());
+        recarga.getPersona().getId());
   }
 }

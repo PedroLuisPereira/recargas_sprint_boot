@@ -11,6 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Table(name = "recargas")
+@ToString
 public class RecargaEntity {
 
     @Id

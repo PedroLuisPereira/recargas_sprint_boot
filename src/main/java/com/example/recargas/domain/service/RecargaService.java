@@ -33,15 +33,16 @@ public class RecargaService {
 
     public Recarga crear(RecargaSolicitudCrear recargaSolicitudCrear) {
 
+        Persona persona = personaPuerto.listarByid(recargaSolicitudCrear.getPersonaId())
+          .orElseThrow(() -> new RegistroNotFoundException("No se encontro id de la persona" )
+          );
+
         Recarga recarga = Recarga.getInstance(
           recargaSolicitudCrear.getValor(),
           recargaSolicitudCrear.getCelular(),
           recargaSolicitudCrear.getOperador(),
-          recargaSolicitudCrear.getPersonaId());
+          persona);
 
-        Persona persona = personaPuerto.listarByid(recargaSolicitudCrear.getPersonaId())
-          .orElseThrow(() -> new RegistroNotFoundException("No se encontro id de la persona" )
-          );
 
 //        SaldoDto saldoDto = restTemplate.getForObject("https://jsonplaceholder.typicode.com/posts/1", SaldoDto.class);
 //
@@ -50,7 +51,7 @@ public class RecargaService {
 //        }
 
 
-        return recargaPuerto.save(persona, recarga);
+        return recargaPuerto.save(recarga);
     }
 
 }

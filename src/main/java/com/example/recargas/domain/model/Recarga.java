@@ -21,47 +21,47 @@ public class Recarga implements Serializable {
 
     private String operador;
 
-    private long personaId;
+    private Persona persona;
 
     public Recarga() {
     }
 
-    private Recarga(Long id, double valor, String celular, String operador, long personaId) {
+    private Recarga(Long id, double valor, String celular, String operador, Persona persona) {
         this.id = id;
         this.valor = valor;
         this.celular = celular;
         this.operador = operador;
-        this.personaId = personaId;
+        this.persona = persona;
     }
 
-    public static Recarga getInstance(long id, double valor, String celular, String operador, long personaId) {
+    public static Recarga getInstance(long id, double valor, String celular, String operador, Persona persona) {
 
         Validacion.validarMayorQueCero(valor, "El campo valor es obligatorio");
         Validacion.validarObligatorio(celular, "El campo celular es obligatorio");
         Validacion.validarSeaNumerico(celular, "El numero de celular errado");
         Validacion.validarObligatorio(operador, "El campo operador es obligatorio");
-        //Validacion.validarMayorQueCero((int) personaId, "El campo personaId es obligatorio");
+        Validacion.validarObligatorio(persona, "El campo personaId es obligatorio");
 
         validarCelular(celular);
         validarOperador(operador);
         validarOperadorCelular(operador, celular);
 
-        return new Recarga(id, valor, celular, operador, personaId);
+        return new Recarga(id, valor, celular, operador, persona);
     }
 
-    public static Recarga getInstance(double valor, String celular, String operador, long personaId) {
+    public static Recarga getInstance(double valor, String celular, String operador, Persona persona) {
 
         Validacion.validarMayorQueCero(valor, "El campo valor es obligatorio");
         Validacion.validarObligatorio(celular, "El campo celular es obligatorio");
         Validacion.validarSeaNumerico(celular, "El numero de celular errado");
         Validacion.validarObligatorio(operador, "El campo operador es obligatorio");
-        //Validacion.validarMayorQueCero((int) personaId, "El campo personaId es obligatorio");
+        Validacion.validarObligatorio(persona, "El campo personaId es obligatorio");
 
         validarCelular(celular);
         validarOperador(operador);
         validarOperadorCelular(operador, celular);
 
-        return new Recarga(null, valor, celular, operador, personaId);
+        return new Recarga(null, valor, celular, operador, persona);
     }
 
     private static void validarCelular(String celular) {
@@ -118,14 +118,18 @@ public class Recarga implements Serializable {
         return operador;
     }
 
-    public long getPersonaId() {
-        return personaId;
+    public Persona getPersona() {
+        return persona;
     }
 
     @Override
     public String toString() {
-        return "Recarga [id=" + id + ", valor=" + valor + ", celular=" + celular + ", operador=" + operador
-          + ", personaId=" + personaId + "]";
+        return "Recarga{" +
+          "id=" + id +
+          ", valor=" + valor +
+          ", celular='" + celular + '\'' +
+          ", operador='" + operador + '\'' +
+          ", persona=" + persona +
+          '}';
     }
-
 }

@@ -19,20 +19,22 @@ public class RecargaMapper {
           entity.getValor(),
           entity.getCelular(),
           entity.getOperador(),
-          entity.getPersonaEntity().getId());
-
+          Persona.getInstance(
+            entity.getPersonaEntity().getId(),
+            entity.getPersonaEntity().getNombre(),
+            entity.getPersonaEntity().getEmail()
+          )
+        );
     }
 
-    public RecargaEntity toEntity(Persona persona, Recarga recarga) {
-
-        PersonaEntity personaEntity = mapper.map(persona, PersonaEntity.class);
+    public RecargaEntity toEntity(Recarga recarga) {
 
         return new RecargaEntity(
           recarga.getId(),
           recarga.getValor(),
           recarga.getCelular(),
           recarga.getOperador(),
-          personaEntity
+          mapper.map(recarga.getPersona(), PersonaEntity.class)
         );
     }
 

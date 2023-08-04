@@ -27,8 +27,8 @@ public class RecargaPersistenceAdapter implements RecargaPuerto {
     }
 
     @Override
-    public Recarga save(Persona persona, Recarga recarga) {
-        RecargaEntity recargaEntity = recargaMapper.toEntity(persona, recarga);
+    public Recarga save(Recarga recarga) {
+        RecargaEntity recargaEntity = recargaMapper.toEntity(recarga);
         recargaEntity = recargaRepository.save(recargaEntity);
         return recargaMapper.toRecarga(recargaEntity);
     }
