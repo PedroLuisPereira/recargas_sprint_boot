@@ -34,8 +34,6 @@ public class RabbitMQConfig {
     @Value("${spring.rabbitmq.password}")
     private String password;
 
-
-
     @Bean
     Queue queue() {
         return new Queue(queueName, false);

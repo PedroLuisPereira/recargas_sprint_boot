@@ -2,60 +2,27 @@ package com.example.recargas.domain.dto;
 
 public class SaldoDto {
 
-    private int userId;
-    private int id;
-    private String title;
-    private String body;
+    double saldo;
 
     public SaldoDto() {
     }
 
-    public SaldoDto(int userId, int id, String title, String body) {
-        this.userId = userId;
-        this.id = id;
-        this.title = title;
-        this.body = body;
+    public SaldoDto(double saldo) {
+        this.saldo = saldo;
     }
 
-    public int getUserId() {
-        return userId;
+    public double getSaldo() {
+        return saldo;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
     }
 
     @Override
     public String toString() {
-        return "SaldoDto{" +
-          "userId=" + userId +
-          ", id=" + id +
-          ", title='" + title + '\'' +
-          ", body='" + body + '\'' +
-          '}';
+        return "SaldoDto [saldo=" + saldo + "]";
     }
+
+
 }
