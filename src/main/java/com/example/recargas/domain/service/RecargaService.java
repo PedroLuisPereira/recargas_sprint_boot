@@ -10,9 +10,12 @@ import com.example.recargas.domain.model.Persona;
 import com.example.recargas.domain.model.Recarga;
 import com.example.recargas.domain.ports.PersonaPuerto;
 import com.example.recargas.domain.ports.RecargaPuerto;
+import com.example.recargas.infrastructure.adapters.output.message.RabbitMQSender;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+
 
 
 public class RecargaService {
@@ -20,6 +23,9 @@ public class RecargaService {
     private final PersonaPuerto personaPuerto;
     private final RecargaPuerto recargaPuerto;
     private final RestTemplate restTemplate;
+
+    @Autowired
+    RabbitMQSender rabbitMQSender;
 
     public RecargaService(PersonaPuerto personaPuerto, RecargaPuerto recargaPuerto, RestTemplate restTemplate) {
         this.personaPuerto = personaPuerto;
@@ -49,6 +55,8 @@ public class RecargaService {
 //        if (saldoDto.getId() != 2) {
 //            throw new NoSaldoException("No se puede hacer la recaraga no hay saldo");
 //        }
+
+        rabbitMQSender.send(persona);
 
 
         return recargaPuerto.save(recarga);
