@@ -1,7 +1,6 @@
 package com.example.recargas.infrastructure.adapters.config;
 
 import com.example.recargas.domain.ports.PersonaPuerto;
-import com.example.recargas.domain.ports.RabbitMQPuerto;
 import com.example.recargas.domain.ports.RecargaPuerto;
 import com.example.recargas.domain.service.PersonaService;
 import com.example.recargas.domain.service.RecargaService;
@@ -63,9 +62,8 @@ public class BeanConfiguration {
 
     @Bean
     public RecargaService recargaService(PersonaPuerto personaRepositorio, RecargaPuerto recargaPuerto,
-                                         RestTemplate restTemplate, RabbitMQPuerto rabbitMQPuerto
-    ) {
-        return new RecargaService(personaRepositorio, recargaPuerto, restTemplate, rabbitMQPuerto);
+            RestTemplate restTemplate) {
+        return new RecargaService(personaRepositorio, recargaPuerto, restTemplate);
     }
 
 }

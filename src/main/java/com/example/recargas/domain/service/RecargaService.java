@@ -11,10 +11,7 @@ import com.example.recargas.domain.exception.RegistroNotFoundException;
 import com.example.recargas.domain.model.Persona;
 import com.example.recargas.domain.model.Recarga;
 import com.example.recargas.domain.ports.PersonaPuerto;
-import com.example.recargas.domain.ports.RabbitMQPuerto;
 import com.example.recargas.domain.ports.RecargaPuerto;
-import com.example.recargas.infrastructure.adapters.output.message.RabbitMQSender;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -25,19 +22,15 @@ public class RecargaService {
 
     private final PersonaPuerto personaPuerto;
     private final RecargaPuerto recargaPuerto;
-    private final RabbitMQPuerto rabbitMQPuerto;
+    
     private final RestTemplate restTemplate;
 
-//    @Autowired
-//    RabbitMQSender rabbitMQSender;
 
-    public RecargaService(PersonaPuerto personaPuerto, RecargaPuerto recargaPuerto,
-                          RestTemplate restTemplate, RabbitMQPuerto rabbitMQPuerto
+    public RecargaService(PersonaPuerto personaPuerto, RecargaPuerto recargaPuerto,  RestTemplate restTemplate
     ) {
         this.personaPuerto = personaPuerto;
         this.recargaPuerto = recargaPuerto;
         this.restTemplate = restTemplate;
-        this.rabbitMQPuerto = rabbitMQPuerto;
     }
 
     public List<Recarga> listar(){
@@ -62,12 +55,6 @@ public class RecargaService {
         if (saldoDto.getSaldo() < recargaSolicitudCrear.getValor()) {
             throw new NoSaldoException("No se puede hacer la recaraga no hay saldo");
         }
-
-        //solicitud asincrona
-        rabbitMQPuerto.enviarMessage(persona);
-
-        //rabbitMQSender.send(persona);
-
 
         return recargaPuerto.save(recarga);
     }

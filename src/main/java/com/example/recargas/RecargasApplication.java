@@ -11,9 +11,3 @@ public class RecargasApplication {
 	}
 
 }
-
-//Exception
-//https://www.javaguides.net/2018/09/spring-boot-2-exception-handling-for-rest-apis.html
-
-//openApi 3
-//https://www.bezkoder.com/spring-boot-swagger-3/
