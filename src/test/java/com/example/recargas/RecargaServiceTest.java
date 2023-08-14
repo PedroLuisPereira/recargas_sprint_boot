@@ -18,7 +18,7 @@ import java.util.Optional;
 import static org.mockito.ArgumentMatchers.anyInt;
 
 @SpringBootTest
-public class RecargaServiceTest {
+class RecargaServiceTest {
 
 
     @InjectMocks

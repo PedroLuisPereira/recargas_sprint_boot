@@ -41,13 +41,13 @@ class RecargaControllerTest {
     @Test
     void debeRetornarErrorPersonaNoExiste() {
 
-        when(personaPersistenceAdapter.listarByid(1l)).thenReturn(Optional.empty());
+        when(personaPersistenceAdapter.listarByid(1L)).thenReturn(Optional.empty());
 
         RecargaSolicitudCrear recargaSolicitudCrear = new RecargaSolicitudCrear(
           1,
           "3006087877",
           "TIGO",
-          1l
+          1L
         );
 
         RegistroNotFoundException thrown = Assertions.assertThrows(RegistroNotFoundException.class, () -> {
