@@ -1,6 +1,5 @@
 package com.example.recargas.infrastructure.adapters.output.persistence;
 
-import com.example.recargas.domain.model.Persona;
 import com.example.recargas.domain.model.Recarga;
 import com.example.recargas.domain.ports.RecargaPuerto;
 import com.example.recargas.infrastructure.adapters.output.persistence.entity.RecargaEntity;
