@@ -1,13 +1,9 @@
 package com.example.recargas.domain.service;
 
 import com.example.recargas.domain.dto.RecargaSolicitudCrear;
-//import com.example.recargas.domain.dto.SaldoDto;
-//import com.example.recargas.domain.exception.NoSaldoException;
 import com.example.recargas.domain.dto.SaldoDto;
 import com.example.recargas.domain.exception.NoSaldoException;
 import com.example.recargas.domain.exception.RegistroNotFoundException;
-//import com.example.recargas.domain.model.Persona;
-
 import com.example.recargas.domain.model.Persona;
 import com.example.recargas.domain.model.Recarga;
 import com.example.recargas.domain.ports.PersonaPuerto;
@@ -51,8 +47,8 @@ public class RecargaService {
 
 
         //solicitud sincrona
-        SaldoDto saldoDto = restTemplate.getForObject("http://localhost:8081/api/saldo", SaldoDto.class);
-        if (saldoDto.getSaldo() < recargaSolicitudCrear.getValor()) {
+        SaldoDto saldoDto = restTemplate.getForObject("https://random-data-api.com/api/v2/banks", SaldoDto.class);
+        if (saldoDto != null && saldoDto.getid() * 10 < recargaSolicitudCrear.getValor()) {
             throw new NoSaldoException("No se puede hacer la recaraga no hay saldo");
         }
 
