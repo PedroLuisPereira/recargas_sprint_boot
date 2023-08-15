@@ -1,7 +1,7 @@
-package com.example.recargas.infrastructure.adapters.output.persistence.mapper;
+package com.example.recargas.infrastructure.output.persistence.mapper;
 
 import com.example.recargas.domain.model.Persona;
-import com.example.recargas.infrastructure.adapters.output.persistence.entity.PersonaEntity;
+import com.example.recargas.infrastructure.output.persistence.entity.PersonaEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 

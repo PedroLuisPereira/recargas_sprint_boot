@@ -1,13 +1,11 @@
 package com.example.recargas;
 
 import com.example.recargas.domain.dto.RecargaSolicitudCrear;
-import com.example.recargas.domain.exception.CampoConException;
 import com.example.recargas.domain.exception.RegistroNotFoundException;
 import com.example.recargas.domain.model.Persona;
-import com.example.recargas.domain.model.Recarga;
 import com.example.recargas.domain.service.RecargaService;
-import com.example.recargas.infrastructure.adapters.output.persistence.PersonaPersistenceAdapter;
-import com.example.recargas.infrastructure.adapters.output.persistence.RecargaPersistenceAdapter;
+import com.example.recargas.infrastructure.output.persistence.PersonaPersistenceAdapter;
+import com.example.recargas.infrastructure.output.persistence.RecargaPersistenceAdapter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

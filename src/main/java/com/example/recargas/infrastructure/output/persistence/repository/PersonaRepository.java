@@ -1,6 +1,6 @@
-package com.example.recargas.infrastructure.adapters.output.persistence.repository;
+package com.example.recargas.infrastructure.output.persistence.repository;
 
-import com.example.recargas.infrastructure.adapters.output.persistence.entity.PersonaEntity;
+import com.example.recargas.infrastructure.output.persistence.entity.PersonaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

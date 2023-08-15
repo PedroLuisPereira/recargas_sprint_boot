@@ -1,4 +1,4 @@
-package com.example.recargas.infrastructure.adapters.input;
+package com.example.recargas.infrastructure.input;
 
 import java.util.List;
 

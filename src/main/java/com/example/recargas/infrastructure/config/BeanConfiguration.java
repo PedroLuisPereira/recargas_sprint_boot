@@ -1,15 +1,15 @@
-package com.example.recargas.infrastructure.adapters.config;
+package com.example.recargas.infrastructure.config;
 
 import com.example.recargas.domain.ports.PersonaPuerto;
 import com.example.recargas.domain.ports.RecargaPuerto;
 import com.example.recargas.domain.service.PersonaService;
 import com.example.recargas.domain.service.RecargaService;
-import com.example.recargas.infrastructure.adapters.output.persistence.PersonaPersistenceAdapter;
-import com.example.recargas.infrastructure.adapters.output.persistence.RecargaPersistenceAdapter;
-import com.example.recargas.infrastructure.adapters.output.persistence.mapper.PersonaMapper;
-import com.example.recargas.infrastructure.adapters.output.persistence.mapper.RecargaMapper;
-import com.example.recargas.infrastructure.adapters.output.persistence.repository.PersonaRepository;
-import com.example.recargas.infrastructure.adapters.output.persistence.repository.RecargaRepository;
+import com.example.recargas.infrastructure.output.persistence.PersonaPersistenceAdapter;
+import com.example.recargas.infrastructure.output.persistence.RecargaPersistenceAdapter;
+import com.example.recargas.infrastructure.output.persistence.mapper.PersonaMapper;
+import com.example.recargas.infrastructure.output.persistence.mapper.RecargaMapper;
+import com.example.recargas.infrastructure.output.persistence.repository.PersonaRepository;
+import com.example.recargas.infrastructure.output.persistence.repository.RecargaRepository;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.web.client.RestTemplateBuilder;

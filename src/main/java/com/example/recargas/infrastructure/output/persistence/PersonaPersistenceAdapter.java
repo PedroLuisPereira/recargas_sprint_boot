@@ -1,10 +1,10 @@
-package com.example.recargas.infrastructure.adapters.output.persistence;
+package com.example.recargas.infrastructure.output.persistence;
 
 import com.example.recargas.domain.model.Persona;
 import com.example.recargas.domain.ports.PersonaPuerto;
-import com.example.recargas.infrastructure.adapters.output.persistence.entity.PersonaEntity;
-import com.example.recargas.infrastructure.adapters.output.persistence.mapper.PersonaMapper;
-import com.example.recargas.infrastructure.adapters.output.persistence.repository.PersonaRepository;
+import com.example.recargas.infrastructure.output.persistence.entity.PersonaEntity;
+import com.example.recargas.infrastructure.output.persistence.mapper.PersonaMapper;
+import com.example.recargas.infrastructure.output.persistence.repository.PersonaRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;

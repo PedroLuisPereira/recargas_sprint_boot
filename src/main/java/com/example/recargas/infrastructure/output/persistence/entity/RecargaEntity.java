@@ -1,4 +1,4 @@
-package com.example.recargas.infrastructure.adapters.output.persistence.entity;
+package com.example.recargas.infrastructure.output.persistence.entity;
 
 import lombok.*;
 
