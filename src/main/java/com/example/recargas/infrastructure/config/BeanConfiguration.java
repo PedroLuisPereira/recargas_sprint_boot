@@ -45,8 +45,8 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public PersonaService personaService(PersonaPersistenceAdapter personaPersistenceAdapter) {
-        return new PersonaService(personaPersistenceAdapter);
+    public PersonaService personaService(PersonaPersistenceAdapter personaPersistenceAdapter, RecargaPuerto recargaRepositorio) {
+        return new PersonaService(personaPersistenceAdapter, recargaRepositorio);
     }
 
     @Bean

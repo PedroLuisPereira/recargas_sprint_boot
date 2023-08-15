@@ -54,8 +54,8 @@ class PersonaServiceTest {
 
         Persona persona = personaService.crear(personaSolicitudCrear);
 
-        Assertions.assertEquals("Ana", persona.getNombre() );
-        Assertions.assertEquals("ana@gmail.com", persona.getEmail() );
+        Assertions.assertEquals("Ana", persona.getNombre());
+        Assertions.assertEquals("ana@gmail.com", persona.getEmail());
 
     }
 
@@ -101,16 +101,29 @@ class PersonaServiceTest {
     @Test
     void debeActualizaRegistro() {
 
-        PersonaSolicitudActualizar personaSolicitudActualizar = new PersonaSolicitudActualizar(1L,"Ana 2", "ana2@gmail.com");
+        PersonaSolicitudActualizar personaSolicitudActualizar = new PersonaSolicitudActualizar(1L, "Ana 2", "ana2@gmail.com");
 
         Persona persona = personaService.actualizar(personaSolicitudActualizar);
 
-        Assertions.assertEquals("Ana 2", persona.getNombre() );
-        Assertions.assertEquals("ana2@gmail.com", persona.getEmail() );
+        Assertions.assertEquals("Ana 2", persona.getNombre());
+        Assertions.assertEquals("ana2@gmail.com", persona.getEmail());
 
     }
 
-    //@Test
+    @Test
+    void noDebeActualizaRegistroEmailYaExiste() {
+
+        PersonaSolicitudActualizar personaSolicitudActualizar = new PersonaSolicitudActualizar(1L, "Ana 2", "maria@gmail.com");
+
+        RegistroDuplicadoException thrown = Assertions.assertThrows(RegistroDuplicadoException.class, () -> {
+            personaService.actualizar(personaSolicitudActualizar);
+        });
+
+        Assertions.assertEquals("Ya existe una persona con ese email", thrown.getMessage());
+
+    }
+
+    @Test
     void debeEliminarUnRegistro() {
         PersonaSolicitudCrear personaSolicitudCrear = new PersonaSolicitudCrear("maria", "ana1@gmail.com");
         Persona persona = personaService.crear(personaSolicitudCrear);
@@ -121,7 +134,17 @@ class PersonaServiceTest {
             Persona personas = personaService.listarById(persona.getId());
         });
 
-        Assertions.assertEquals("No se encontro persona con Id: " + persona.getId() , thrown.getMessage());
+        Assertions.assertEquals("No se encontro persona con ese Id", thrown.getMessage());
+    }
+
+    @Test
+    void noDebeEliminarUnRegistro() {
+
+        RegistroNotFoundException thrown = Assertions.assertThrows(RegistroNotFoundException.class, () -> {
+            personaService.eliminar(500);
+        });
+
+        Assertions.assertEquals("No se encontro persona con ese Id", thrown.getMessage());
     }
 
 }

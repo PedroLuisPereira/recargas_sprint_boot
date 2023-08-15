@@ -6,6 +6,7 @@ import com.example.recargas.domain.exception.RegistroNotFoundException;
 import com.example.recargas.domain.exception.RegistroDuplicadoException;
 import com.example.recargas.domain.model.Persona;
 import com.example.recargas.domain.ports.PersonaPuerto;
+import com.example.recargas.domain.ports.RecargaPuerto;
 
 
 import java.util.List;
@@ -14,9 +15,11 @@ import java.util.stream.Collectors;
 public class PersonaService {
 
     private final PersonaPuerto personaRepositorio;
+    private final RecargaPuerto recargaRepositorio;
 
-    public PersonaService(PersonaPuerto personaRepositorio) {
+    public PersonaService(PersonaPuerto personaRepositorio, RecargaPuerto recargaRepositorio) {
         this.personaRepositorio = personaRepositorio;
+        this.recargaRepositorio = recargaRepositorio;
     }
 
     public List<Persona> listar() {
@@ -58,13 +61,13 @@ public class PersonaService {
 
         List<Persona> list = personaRepositorio.listarByEmail(personaActualizar.getEmail())
           .stream()
-          .filter(persona1 -> persona1.getId() == personaActualizar.getId())
+          .filter(persona1 -> persona1.getId() != personaActualizar.getId())
           .collect(Collectors.toList());
 
-        if (!list.isEmpty()) {
+        if (list.isEmpty()) {
             persona = personaRepositorio.save(persona);
         } else {
-            throw new RegistroDuplicadoException("Ya existe una persona con ese email: " + personaActualizar.getEmail() );
+            throw new RegistroDuplicadoException("Ya existe una persona con ese email");
         }
 
         return personaRepositorio.save(persona);
@@ -72,8 +75,11 @@ public class PersonaService {
 
     public void eliminar(long id) {
 
-        //validar si tiene recargas
+        personaRepositorio.listarByid(id)
+          .orElseThrow(() -> new RegistroNotFoundException("No se encontro persona con ese Id" )
+          );
 
+        //validar si tiene recargas
         personaRepositorio.eliminar(id);
     }
 

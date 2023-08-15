@@ -46,4 +46,12 @@ public class Persona implements Serializable {
         return email;
     }
 
+    @Override
+    public String toString() {
+        return "Persona{" +
+          "id=" + id +
+          ", nombre='" + nombre + '\'' +
+          ", email='" + email + '\'' +
+          '}';
+    }
 }
