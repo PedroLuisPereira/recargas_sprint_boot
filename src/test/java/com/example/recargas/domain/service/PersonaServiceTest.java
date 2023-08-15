@@ -1,11 +1,11 @@
-package com.example.recargas;
+package com.example.recargas.domain.service;
 
+import com.example.recargas.domain.dto.PersonaSolicitudActualizar;
 import com.example.recargas.domain.dto.PersonaSolicitudCrear;
 import com.example.recargas.domain.exception.CampoConException;
 import com.example.recargas.domain.exception.RegistroDuplicadoException;
 import com.example.recargas.domain.exception.RegistroNotFoundException;
 import com.example.recargas.domain.model.Persona;
-import com.example.recargas.domain.service.PersonaService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @TestPropertySource(locations = "classpath:db-test.properties")
-@Sql("/test-mysql.sql")
-class PersonaUnitarioTest {
+@Sql("/test-mysql.sql")  //se ejecuta antes
+class PersonaServiceTest {
     @Autowired
     PersonaService personaService;
 
@@ -40,10 +40,10 @@ class PersonaUnitarioTest {
     void debeLanzarErrorAlListarUnRegistro() {
 
         RegistroNotFoundException thrown = Assertions.assertThrows(RegistroNotFoundException.class, () -> {
-            Persona personas = personaService.listarById(100);
+            personaService.listarById(100);
         });
 
-        Assertions.assertEquals("No se encontro persona con Id: 100", thrown.getMessage());
+        Assertions.assertEquals("No se encontro persona con ese Id", thrown.getMessage());
 
     }
 
@@ -60,12 +60,12 @@ class PersonaUnitarioTest {
     }
 
     @Test
-    void debeLanzarErrorAlUnRegistroNombre() {
+    void debeLanzarErrorNombreNull() {
 
         PersonaSolicitudCrear personaSolicitudCrear = new PersonaSolicitudCrear(null, "ana@gmail.com");
 
         CampoConException thrown = Assertions.assertThrows(CampoConException.class, () -> {
-            Persona personas = personaService.crear(personaSolicitudCrear);
+            personaService.crear(personaSolicitudCrear);
         });
 
         Assertions.assertEquals("El campo nombre es obligatorio", thrown.getMessage());
@@ -73,12 +73,12 @@ class PersonaUnitarioTest {
     }
 
     @Test
-    void debeLanzarErrorAlUnRegistroEmail() {
+    void debeLanzarErrorEmailNull() {
 
         PersonaSolicitudCrear personaSolicitudCrear = new PersonaSolicitudCrear("Mayo", null);
 
         CampoConException thrown = Assertions.assertThrows(CampoConException.class, () -> {
-            Persona personas = personaService.crear(personaSolicitudCrear);
+            personaService.crear(personaSolicitudCrear);
         });
 
         Assertions.assertEquals("El campo email es obligatorio", thrown.getMessage());
@@ -86,19 +86,31 @@ class PersonaUnitarioTest {
     }
 
     @Test
-    void debeLanzarErrorAlUnRegistroEmailYaExiste() {
+    void debeLanzarErrorEmailYaExiste() {
         PersonaSolicitudCrear personaSolicitudCrear = new PersonaSolicitudCrear("maria", "ana@gmail.com");
         personaService.crear(personaSolicitudCrear);
 
         RegistroDuplicadoException thrown = Assertions.assertThrows(RegistroDuplicadoException.class, () -> {
-            Persona personas = personaService.crear(personaSolicitudCrear);
+            personaService.crear(personaSolicitudCrear);
         });
 
-        Assertions.assertEquals("Ya existe una persona con el email: ana@gmail.com", thrown.getMessage());
+        Assertions.assertEquals("Ya existe una persona con ese email", thrown.getMessage());
 
     }
 
     @Test
+    void debeActualizaRegistro() {
+
+        PersonaSolicitudActualizar personaSolicitudActualizar = new PersonaSolicitudActualizar(1L,"Ana 2", "ana2@gmail.com");
+
+        Persona persona = personaService.actualizar(personaSolicitudActualizar);
+
+        Assertions.assertEquals("Ana 2", persona.getNombre() );
+        Assertions.assertEquals("ana2@gmail.com", persona.getEmail() );
+
+    }
+
+    //@Test
     void debeEliminarUnRegistro() {
         PersonaSolicitudCrear personaSolicitudCrear = new PersonaSolicitudCrear("maria", "ana1@gmail.com");
         Persona persona = personaService.crear(personaSolicitudCrear);

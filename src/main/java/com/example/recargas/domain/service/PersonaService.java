@@ -25,7 +25,7 @@ public class PersonaService {
 
     public Persona listarById(long id) {
         return personaRepositorio.listarByid(id)
-          .orElseThrow(() -> new RegistroNotFoundException("No se encontro persona con Id: " + id)
+          .orElseThrow(() -> new RegistroNotFoundException("No se encontro persona con ese Id" )
           );
     }
 
@@ -38,7 +38,7 @@ public class PersonaService {
         if (list.isEmpty()) {
             persona = personaRepositorio.save(persona);
         } else {
-            throw new RegistroDuplicadoException("Ya existe una persona con el email: " + solicitudPersona.getEmail() );
+            throw new RegistroDuplicadoException("Ya existe una persona con ese email");
         }
 
         return persona;
@@ -53,7 +53,7 @@ public class PersonaService {
         );
 
         personaRepositorio.listarByid(persona.getId())
-          .orElseThrow(() -> new RegistroNotFoundException("No se encontro la persona con Id: " + personaActualizar.getId())
+          .orElseThrow(() -> new RegistroNotFoundException("No se encontro la persona ese Id")
           );
 
         List<Persona> list = personaRepositorio.listarByEmail(personaActualizar.getEmail())
