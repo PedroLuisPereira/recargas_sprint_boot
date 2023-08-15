@@ -5,12 +5,15 @@ import com.example.recargas.domain.dto.PersonaSolicitudCrear;
 import com.example.recargas.domain.exception.RegistroNotFoundException;
 import com.example.recargas.domain.exception.RegistroDuplicadoException;
 import com.example.recargas.domain.model.Persona;
+import com.example.recargas.domain.model.Recarga;
 import com.example.recargas.domain.ports.PersonaPuerto;
 import com.example.recargas.domain.ports.RecargaPuerto;
 
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.apache.logging.log4j.ThreadContext.isEmpty;
 
 public class PersonaService {
 
@@ -28,14 +31,12 @@ public class PersonaService {
 
     public Persona listarById(long id) {
         return personaRepositorio.listarByid(id)
-          .orElseThrow(() -> new RegistroNotFoundException("No se encontro persona con ese Id" )
+          .orElseThrow(() -> new RegistroNotFoundException("No se encontro persona con ese Id")
           );
     }
 
     public Persona crear(PersonaSolicitudCrear solicitudPersona) {
-
         Persona persona = Persona.getInstance(solicitudPersona.getNombre(), solicitudPersona.getEmail());
-
         List<Persona> list = personaRepositorio.listarByEmail(solicitudPersona.getEmail());
 
         if (list.isEmpty()) {
@@ -74,13 +75,18 @@ public class PersonaService {
     }
 
     public void eliminar(long id) {
-
-        personaRepositorio.listarByid(id)
-          .orElseThrow(() -> new RegistroNotFoundException("No se encontro persona con ese Id" )
+        Persona persona = personaRepositorio.listarByid(id)
+          .orElseThrow(() -> new RegistroNotFoundException("No se encontro persona con ese Id")
           );
 
-        //validar si tiene recargas
-        personaRepositorio.eliminar(id);
+        List<Recarga> list = recargaRepositorio.listarByPersona(persona);
+
+        if (list.isEmpty()) {
+            personaRepositorio.eliminar(id);
+        } else {
+            throw new RegistroDuplicadoException("No se puede eliminar registro");
+        }
+
     }
 
 }

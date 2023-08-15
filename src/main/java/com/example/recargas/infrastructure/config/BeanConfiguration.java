@@ -40,7 +40,7 @@ public class BeanConfiguration {
 
     @Bean
     public PersonaPersistenceAdapter personaPersistenceAdapter(PersonaRepository personaRepository,
-            PersonaMapper productMapper) {
+                                                               PersonaMapper productMapper) {
         return new PersonaPersistenceAdapter(personaRepository, productMapper);
     }
 
@@ -56,13 +56,13 @@ public class BeanConfiguration {
 
     @Bean
     public RecargaPersistenceAdapter recargaPersistenceAdapter(RecargaRepository recargaRepository,
-            RecargaMapper recargaMapper) {
-        return new RecargaPersistenceAdapter(recargaRepository, recargaMapper);
+                                                               RecargaMapper recargaMapper, PersonaMapper personaMapper) {
+        return new RecargaPersistenceAdapter(recargaRepository, recargaMapper, personaMapper);
     }
 
     @Bean
     public RecargaService recargaService(PersonaPuerto personaRepositorio, RecargaPuerto recargaPuerto,
-            RestTemplate restTemplate) {
+                                         RestTemplate restTemplate) {
         return new RecargaService(personaRepositorio, recargaPuerto, restTemplate);
     }
 

@@ -119,4 +119,14 @@ public class Recarga implements Serializable {
         return persona;
     }
 
+    @Override
+    public String toString() {
+        return "Recarga{" +
+          "id=" + id +
+          ", valor=" + valor +
+          ", celular='" + celular + '\'' +
+          ", operador='" + operador + '\'' +
+          ", persona=" + persona +
+          '}';
+    }
 }
