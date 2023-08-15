@@ -13,18 +13,15 @@ public class Recarga implements Serializable {
     private static final int[] MOVISTART = {315, 316, 317, 318, 319};
     private static final int[] TIGO = {300, 301, 302, 303, 304, 324};
 
-    private Long id;
+    private final Long id;
 
-    private double valor;
+    private final double valor;
 
-    private String celular;
+    private final String celular;
 
-    private String operador;
+    private final String operador;
 
-    private Persona persona;
-
-    public Recarga() {
-    }
+    private final Persona persona;
 
     private Recarga(Long id, double valor, String celular, String operador, Persona persona) {
         this.id = id;
@@ -40,7 +37,7 @@ public class Recarga implements Serializable {
         Validacion.validarObligatorio(celular, "El campo celular es obligatorio");
         Validacion.validarSeaNumerico(celular, "El numero de celular errado");
         Validacion.validarObligatorio(operador, "El campo operador es obligatorio");
-        Validacion.validarObligatorio(persona, "El campo personaId es obligatorio");
+        Validacion.validarObligatorio(persona, "El campo persona es obligatorio");
 
         validarCelular(celular);
         validarOperador(operador);
@@ -55,7 +52,7 @@ public class Recarga implements Serializable {
         Validacion.validarObligatorio(celular, "El campo celular es obligatorio");
         Validacion.validarSeaNumerico(celular, "El numero de celular errado");
         Validacion.validarObligatorio(operador, "El campo operador es obligatorio");
-        Validacion.validarObligatorio(persona, "El campo personaId es obligatorio");
+        Validacion.validarObligatorio(persona, "El campo persona es obligatorio");
 
         validarCelular(celular);
         validarOperador(operador);
@@ -122,14 +119,4 @@ public class Recarga implements Serializable {
         return persona;
     }
 
-    @Override
-    public String toString() {
-        return "Recarga{" +
-          "id=" + id +
-          ", valor=" + valor +
-          ", celular='" + celular + '\'' +
-          ", operador='" + operador + '\'' +
-          ", persona=" + persona +
-          '}';
-    }
 }

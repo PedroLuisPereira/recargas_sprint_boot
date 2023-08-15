@@ -13,7 +13,7 @@ public class Validacion {
         }
     }
 
-    public static void validarIntMayorQueCero(int valor, String mensaje) {
+    public static void validarIntMayorQueCero(Long valor, String mensaje) {
         if (valor <= 0) {
             throw new CampoConException(mensaje);
         }

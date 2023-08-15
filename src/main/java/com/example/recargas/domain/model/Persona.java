@@ -7,11 +7,8 @@ import java.io.Serializable;
 public class Persona implements Serializable {
 
     private Long id;
-    private String nombre;
-    private String email;
-
-    private Persona() {
-    }
+    private final String nombre;
+    private final String email;
 
     private Persona(Long id, String nombre, String email) {
         this.id = id;
@@ -31,7 +28,7 @@ public class Persona implements Serializable {
     }
 
     public static Persona getInstance(long id, String nombre, String email) {
-        Validacion.validarIntMayorQueCero((int) id, "Id es obligatorio");
+        Validacion.validarIntMayorQueCero(id, "Id es obligatorio");
         Validacion.validarObligatorio(nombre, "El campo nombre es obligatorio");
         Validacion.validarObligatorio(email, "El campo email es obligatorio");
         return new Persona(id, nombre, email);
@@ -49,12 +46,4 @@ public class Persona implements Serializable {
         return email;
     }
 
-    @Override
-    public String toString() {
-        return "Persona{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
 }
