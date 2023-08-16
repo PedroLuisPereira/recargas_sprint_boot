@@ -9,7 +9,6 @@ import com.example.recargas.domain.model.Recarga;
 import com.example.recargas.domain.ports.HttpPuerto;
 import com.example.recargas.domain.ports.PersonaPuerto;
 import com.example.recargas.domain.ports.RecargaPuerto;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -18,26 +17,23 @@ public class RecargaService {
 
     private final PersonaPuerto personaPuerto;
     private final RecargaPuerto recargaPuerto;
-
-
     private final HttpPuerto httpPuerto;
 
-
-    public RecargaService(PersonaPuerto personaPuerto, RecargaPuerto recargaPuerto,  HttpPuerto httpPuerto
+    public RecargaService(PersonaPuerto personaPuerto, RecargaPuerto recargaPuerto, HttpPuerto httpPuerto
     ) {
         this.personaPuerto = personaPuerto;
         this.recargaPuerto = recargaPuerto;
         this.httpPuerto = httpPuerto;
     }
 
-    public List<Recarga> listar(){
+    public List<Recarga> listar() {
         return recargaPuerto.list();
     }
 
     public Recarga crear(RecargaSolicitudCrear recargaSolicitudCrear) {
 
         Persona persona = personaPuerto.listarByid(recargaSolicitudCrear.getPersonaId())
-          .orElseThrow(() -> new RegistroNotFoundException("No se encontro id de la persona" )
+          .orElseThrow(() -> new RegistroNotFoundException("No se encontro id de la persona")
           );
 
         Recarga recarga = Recarga.getInstance(

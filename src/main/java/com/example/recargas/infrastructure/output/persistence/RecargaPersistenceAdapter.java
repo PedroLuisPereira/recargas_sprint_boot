@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 public class RecargaPersistenceAdapter implements RecargaPuerto {
 
     private final RecargaRepository recargaRepository;
-
     private final RecargaMapper recargaMapper;
     private final PersonaMapper personaMapper;
 

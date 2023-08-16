@@ -4,11 +4,15 @@ import com.example.recargas.domain.dto.RecargaSolicitudCrear;
 import com.example.recargas.domain.exception.CampoConException;
 import com.example.recargas.domain.exception.RegistroNotFoundException;
 import com.example.recargas.domain.model.Persona;
+import com.example.recargas.domain.ports.HttpPuerto;
 import com.example.recargas.domain.ports.PersonaPuerto;
 import com.example.recargas.domain.ports.RecargaPuerto;
 import com.example.recargas.domain.service.RecargaService;
+import com.example.recargas.infrastructure.output.persistence.RecargaPersistenceAdapter;
 import com.example.recargas.infrastructure.output.persistence.entity.PersonaEntity;
 import com.example.recargas.infrastructure.output.persistence.entity.RecargaEntity;
+import com.example.recargas.infrastructure.output.persistence.mapper.PersonaMapper;
+import com.example.recargas.infrastructure.output.persistence.mapper.RecargaMapper;
 import com.example.recargas.infrastructure.output.persistence.repository.PersonaRepository;
 import com.example.recargas.infrastructure.output.persistence.repository.RecargaRepository;
 import org.junit.jupiter.api.Assertions;
@@ -40,31 +44,27 @@ class RecargaServiceTest {
     @Test
     void debeListarTodosLosRegistros() {
 
-//        // 1. Preparación
-//        PersonaEntity personaEntity = new PersonaEntity(1L,"Juan", "juan@gmail.com");
-//
-//        List<RecargaEntity> recargaEntities = new ArrayList<>(Arrays.asList(
-//          new RecargaEntity(1L, 50000, "3006087877", "TIGO", personaEntity),
-//          new RecargaEntity(2L, 30000, "3106087877", "CLARO", personaEntity)));
-//
-//        var recargaRepository = Mockito.mock(RecargaRepository.class); //simular repositorio
-//        var personaRepository = Mockito.mock(PersonaRepository.class); //simular repositorio
-//        Mockito.when(recargaRepository.findAll()).thenReturn(recargaEntities);
-//
-//        // 2. Ejecución
-//        var  ServicioPersonaListar = new RecargaService(personaRepository,recargaRepository,) ServicioPersonaListar(repositorioPersona);
-//        var personaListar = ServicioPersonaListar.listar();
-//
-//        // 3. Comparacion
-//        Assertions.assertEquals(2, personaListar.size());
-//
-//        List<RecargaEntity>
-//        when(recargaRepository.findAll()).thenReturn(Collections.emptyList());
-//
-//        assertThat(countryService.findAll()).isEmpty();
-//
-//        List<Persona> personas = personaService.listar();
-//        assertEquals(3, personas.size());
+        // 1. Preparación
+        PersonaEntity personaEntity = new PersonaEntity(1L, "Juan", "juan@gmail.com");
+
+        List<RecargaEntity> recargaEntities = new ArrayList<>(Arrays.asList(
+          new RecargaEntity(1L, 50000, "3006087877", "TIGO", personaEntity),
+          new RecargaEntity(2L, 30000, "3106087877", "CLARO", personaEntity)));
+
+        var recargaRepository = Mockito.mock(RecargaRepository.class); //simular repositorio
+        Mockito.when(recargaRepository.findAll()).thenReturn(recargaEntities);
+        RecargaPuerto recargaPuerto = new RecargaPersistenceAdapter(recargaRepository, new RecargaMapper(), new PersonaMapper());
+
+        var personaPuerto = Mockito.mock(PersonaPuerto.class); //simular repositorio
+        var httpPuerto = Mockito.mock(HttpPuerto.class); //simular repositorio
+
+        // 2. Ejecución
+        var recargaService = new RecargaService(personaPuerto, recargaPuerto, httpPuerto);
+        var recargaList = recargaService.listar();
+
+        // 3. Comparacion
+        Assertions.assertEquals(2, recargaList.size());
+
     }
 
     /*
