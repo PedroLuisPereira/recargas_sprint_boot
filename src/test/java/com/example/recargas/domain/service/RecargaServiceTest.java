@@ -1,13 +1,16 @@
 package com.example.recargas.domain.service;
 
 import com.example.recargas.domain.dto.RecargaSolicitudCrear;
+import com.example.recargas.domain.dto.SaldoDto;
 import com.example.recargas.domain.exception.CampoConException;
 import com.example.recargas.domain.exception.RegistroNotFoundException;
 import com.example.recargas.domain.model.Persona;
+import com.example.recargas.domain.model.Recarga;
 import com.example.recargas.domain.ports.HttpPuerto;
 import com.example.recargas.domain.ports.PersonaPuerto;
 import com.example.recargas.domain.ports.RecargaPuerto;
 import com.example.recargas.domain.service.RecargaService;
+import com.example.recargas.infrastructure.output.persistence.PersonaPersistenceAdapter;
 import com.example.recargas.infrastructure.output.persistence.RecargaPersistenceAdapter;
 import com.example.recargas.infrastructure.output.persistence.entity.PersonaEntity;
 import com.example.recargas.infrastructure.output.persistence.entity.RecargaEntity;
@@ -61,8 +64,53 @@ class RecargaServiceTest {
         var recargaService = new RecargaService(personaPuerto, recargaPuerto, httpPuerto);
         var recargaList = recargaService.listar();
 
+        recargaService.crear(null);
+
         // 3. Comparacion
         Assertions.assertEquals(2, recargaList.size());
+
+    }
+
+    @Test
+    void debeCrearRecarga() {
+
+        // 1. Preparación
+        PersonaEntity personaEntity = new PersonaEntity(1L, "Juan", "juan@gmail.com");
+        RecargaEntity recargaEntity = new RecargaEntity(
+          null,
+          2000,
+          "3006087877",
+          "TIGO",
+          personaEntity
+        );
+
+
+        var personaRepository = Mockito.mock(PersonaRepository.class); //simular
+        Mockito.when(personaRepository.findById(1L)).thenReturn(Optional.of(personaEntity)); //cuando se llame
+
+        var recargaRepository = Mockito.mock(RecargaRepository.class); //simular
+        Mockito.when(recargaRepository.save(recargaEntity)).thenReturn(recargaEntity); //cuando se llame
+
+        var httpPuerto = Mockito.mock(HttpPuerto.class); //simular
+        Mockito.when(httpPuerto.getSaldo()).thenReturn(new SaldoDto(100000)); //cuando se llame
+
+        PersonaPuerto personaPuerto = new PersonaPersistenceAdapter(personaRepository, new PersonaMapper());
+        RecargaPuerto recargaPuerto = new RecargaPersistenceAdapter(recargaRepository, new RecargaMapper(), new PersonaMapper());
+
+
+        // 2. Ejecución
+        var recargaService = new RecargaService(personaPuerto, recargaPuerto, httpPuerto);
+        var recarga = recargaService.crear(new RecargaSolicitudCrear(
+          2000,
+          "3006087877",
+          "TIGO",
+          1L
+        ));
+
+        // 3. Comparacion
+        Assertions.assertEquals(2000, recarga.getValor());
+        Assertions.assertEquals("3006087877", recarga.getCelular());
+        Assertions.assertEquals("TIGO", recarga.getOperador());
 
     }
 
