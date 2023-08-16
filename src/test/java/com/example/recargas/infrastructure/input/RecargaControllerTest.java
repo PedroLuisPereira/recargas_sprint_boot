@@ -1,4 +1,4 @@
-package com.example.recargas;
+package com.example.recargas.infrastructure.input;
 
 import com.example.recargas.domain.dto.RecargaSolicitudCrear;
 import com.example.recargas.domain.exception.RegistroNotFoundException;

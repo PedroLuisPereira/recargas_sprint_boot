@@ -1,9 +1,11 @@
 package com.example.recargas.infrastructure.config;
 
+import com.example.recargas.domain.ports.HttpPuerto;
 import com.example.recargas.domain.ports.PersonaPuerto;
 import com.example.recargas.domain.ports.RecargaPuerto;
 import com.example.recargas.domain.service.PersonaService;
 import com.example.recargas.domain.service.RecargaService;
+import com.example.recargas.infrastructure.output.http.EmpresaAdapter;
 import com.example.recargas.infrastructure.output.persistence.PersonaPersistenceAdapter;
 import com.example.recargas.infrastructure.output.persistence.RecargaPersistenceAdapter;
 import com.example.recargas.infrastructure.output.persistence.mapper.PersonaMapper;
@@ -62,8 +64,13 @@ public class BeanConfiguration {
 
     @Bean
     public RecargaService recargaService(PersonaPuerto personaRepositorio, RecargaPuerto recargaPuerto,
-                                         RestTemplate restTemplate) {
-        return new RecargaService(personaRepositorio, recargaPuerto, restTemplate);
+                                         HttpPuerto httpPuerto) {
+        return new RecargaService(personaRepositorio, recargaPuerto, httpPuerto);
+    }
+
+    @Bean
+    public EmpresaAdapter empresaAdapter(RestTemplate restTemplate) {
+        return new EmpresaAdapter(restTemplate);
     }
 
 }

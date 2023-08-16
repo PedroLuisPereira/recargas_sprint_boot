@@ -6,6 +6,7 @@ import com.example.recargas.domain.exception.NoSaldoException;
 import com.example.recargas.domain.exception.RegistroNotFoundException;
 import com.example.recargas.domain.model.Persona;
 import com.example.recargas.domain.model.Recarga;
+import com.example.recargas.domain.ports.HttpPuerto;
 import com.example.recargas.domain.ports.PersonaPuerto;
 import com.example.recargas.domain.ports.RecargaPuerto;
 import org.springframework.web.client.RestTemplate;
@@ -17,15 +18,16 @@ public class RecargaService {
 
     private final PersonaPuerto personaPuerto;
     private final RecargaPuerto recargaPuerto;
-    
-    private final RestTemplate restTemplate;
 
 
-    public RecargaService(PersonaPuerto personaPuerto, RecargaPuerto recargaPuerto,  RestTemplate restTemplate
+    private final HttpPuerto httpPuerto;
+
+
+    public RecargaService(PersonaPuerto personaPuerto, RecargaPuerto recargaPuerto,  HttpPuerto httpPuerto
     ) {
         this.personaPuerto = personaPuerto;
         this.recargaPuerto = recargaPuerto;
-        this.restTemplate = restTemplate;
+        this.httpPuerto = httpPuerto;
     }
 
     public List<Recarga> listar(){
@@ -45,9 +47,9 @@ public class RecargaService {
           persona);
 
 
-        //solicitud sincrona
-        SaldoDto saldoDto = restTemplate.getForObject("https://random-data-api.com/api/v2/banks", SaldoDto.class);
-        if (saldoDto != null && saldoDto.getid() * 10 < recargaSolicitudCrear.getValor()) {
+        SaldoDto saldoDto = httpPuerto.getSaldo();
+
+        if (saldoDto != null && saldoDto.getid() * 3 < recargaSolicitudCrear.getValor()) {
             throw new NoSaldoException("No se puede hacer la recaraga no hay saldo");
         }
 
