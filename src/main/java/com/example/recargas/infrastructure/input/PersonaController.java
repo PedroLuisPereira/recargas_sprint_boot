@@ -52,8 +52,7 @@ public class PersonaController {
     }
 
     @PutMapping("/personas/{id}")
-    public PersonaRespuestaDto updatePersona(@PathVariable(value = "id") Long id,
-            @RequestBody PersonaCrearDto personaCrearDto) {
+    public PersonaRespuestaDto updatePersona(@PathVariable(value = "id") Long id, @RequestBody PersonaCrearDto personaCrearDto) {
         return personaActualizar.ejecutar(id, personaCrearDto);
     }
 

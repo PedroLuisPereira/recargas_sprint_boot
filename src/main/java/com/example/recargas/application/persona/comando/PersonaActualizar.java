@@ -20,7 +20,6 @@ public class PersonaActualizar {
 
     @Transactional
     public PersonaRespuestaDto ejecutar(long id, PersonaCrearDto personaCrearDto) {
-
         PersonaSolicitudActualizar personaSolicitudActualizar = PersonaTransformador.trasnformar(id, personaCrearDto);
         Persona persona = personaService.actualizar(personaSolicitudActualizar);
         return PersonaTransformador.trasnformar(persona);

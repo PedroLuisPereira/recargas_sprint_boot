@@ -1,5 +1,6 @@
 package com.example.recargas.infrastructure.input;
 
+import com.example.recargas.application.persona.dto.PersonaCrearDto;
 import com.example.recargas.domain.dto.PersonaSolicitudActualizar;
 import com.example.recargas.domain.dto.PersonaSolicitudCrear;
 import com.example.recargas.domain.model.Persona;
@@ -98,10 +99,10 @@ class PersonaControladorTest {
         PersonaSolicitudCrear personaSolicitudCrear = new PersonaSolicitudCrear("Ana Maria", "ana1@gmail.com");
         Persona persona = personaService.crear(personaSolicitudCrear);
 
-        PersonaSolicitudActualizar personaSolicitudActualizar = new PersonaSolicitudActualizar(persona.getId(),"Ana Maria", "ana1@gmail.com");
+        PersonaCrearDto personaCrearDto = new PersonaCrearDto ("Ana Maria", "ana1@gmail.com");
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/personas/"+persona.getId())
-            .content(asJsonString(personaSolicitudActualizar))
+            .content(asJsonString(personaCrearDto))
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON))
           .andExpect(MockMvcResultMatchers
