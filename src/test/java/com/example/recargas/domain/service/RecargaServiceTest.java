@@ -1,4 +1,4 @@
-package com.example.recargas;
+package com.example.recargas.domain.service;
 
 import com.example.recargas.domain.dto.RecargaSolicitudCrear;
 import com.example.recargas.domain.exception.CampoConException;

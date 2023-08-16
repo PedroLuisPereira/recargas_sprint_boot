@@ -1,5 +1,6 @@
-package com.example.recargas;
+package com.example.recargas.infrastructure.input;
 
+import com.example.recargas.domain.dto.PersonaSolicitudActualizar;
 import com.example.recargas.domain.dto.PersonaSolicitudCrear;
 import com.example.recargas.domain.model.Persona;
 import com.example.recargas.domain.service.PersonaService;
@@ -45,7 +46,7 @@ class PersonaControladorTest {
     }
 
     @Test
-    void debeListarUnaPersonas() throws Exception {
+    void debeListarUnaPersona() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/personas/1").contentType(MediaType.APPLICATION_JSON))
           .andExpect(MockMvcResultMatchers
@@ -59,7 +60,7 @@ class PersonaControladorTest {
     }
 
     @Test
-    void noDebeListarUnaPersonas() throws Exception {
+    void noDebeListarUnaPersona() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/personas/1000").contentType(MediaType.APPLICATION_JSON))
           .andExpect(MockMvcResultMatchers
@@ -68,12 +69,12 @@ class PersonaControladorTest {
           .andExpect(MockMvcResultMatchers
             .content()
             .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-          .andExpect(jsonPath("$.message", is("No se encontro persona con Id: 1000")));
+          .andExpect(jsonPath("$.message", is("No se encontro persona con ese Id")));
         ;
     }
 
     @Test
-    void debeCrearUnaPersonas() throws Exception {
+    void debeCrearUnaPersona() throws Exception {
 
         PersonaSolicitudCrear personaSolicitudCrear = new PersonaSolicitudCrear("Ana", "ana@gmail.com");
 
@@ -88,6 +89,28 @@ class PersonaControladorTest {
             .content()
             .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
           .andExpect(jsonPath("$.nombre", is("Ana")));
+        ;
+    }
+
+    @Test
+    void debeActualizarUnaPersona() throws Exception {
+
+        PersonaSolicitudCrear personaSolicitudCrear = new PersonaSolicitudCrear("Ana Maria", "ana1@gmail.com");
+        Persona persona = personaService.crear(personaSolicitudCrear);
+
+        PersonaSolicitudActualizar personaSolicitudActualizar = new PersonaSolicitudActualizar(persona.getId(),"Ana Maria", "ana1@gmail.com");
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/personas/"+persona.getId())
+            .content(asJsonString(personaSolicitudActualizar))
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON))
+          .andExpect(MockMvcResultMatchers
+            .status()
+            .isOk())
+          .andExpect(MockMvcResultMatchers
+            .content()
+            .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+          .andExpect(jsonPath("$.nombre", is("Ana Maria")));
         ;
     }
 
