@@ -77,10 +77,10 @@ class PersonaControladorTest {
     @Test
     void debeCrearUnaPersona() throws Exception {
 
-        PersonaSolicitudCrear personaSolicitudCrear = new PersonaSolicitudCrear("Ana", "ana@gmail.com");
+        PersonaCrearDto personaCrearDto = new PersonaCrearDto("Ana", "ana@gmail.com");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/personas")
-            .content(asJsonString(personaSolicitudCrear))
+            .content(asJsonString(personaCrearDto))
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON))
           .andExpect(MockMvcResultMatchers
@@ -99,9 +99,9 @@ class PersonaControladorTest {
         PersonaSolicitudCrear personaSolicitudCrear = new PersonaSolicitudCrear("Ana Maria", "ana1@gmail.com");
         Persona persona = personaService.crear(personaSolicitudCrear);
 
-        PersonaCrearDto personaCrearDto = new PersonaCrearDto ("Ana Maria", "ana1@gmail.com");
+        PersonaCrearDto personaCrearDto = new PersonaCrearDto("Ana Maria", "ana1@gmail.com");
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/personas/"+persona.getId())
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/personas/" + persona.getId())
             .content(asJsonString(personaCrearDto))
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON))
@@ -122,7 +122,6 @@ class PersonaControladorTest {
         Persona persona = personaService.crear(personaSolicitudCrear);
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/personas/" + persona.getId())
-            .content(asJsonString(personaSolicitudCrear))
             .contentType(MediaType.APPLICATION_JSON))
           .andExpect(MockMvcResultMatchers
             .status()
