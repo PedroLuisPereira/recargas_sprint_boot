@@ -51,12 +51,11 @@ class RecargaServiceTest {
           new RecargaEntity(1L, 50000, "3006087877", "TIGO", personaEntity),
           new RecargaEntity(2L, 30000, "3106087877", "CLARO", personaEntity)));
 
+        var personaPuerto = Mockito.mock(PersonaPuerto.class); //simular
+        var httpPuerto = Mockito.mock(HttpPuerto.class); //simular
         var recargaRepository = Mockito.mock(RecargaRepository.class); //simular repositorio
-        Mockito.when(recargaRepository.findAll()).thenReturn(recargaEntities);
+        Mockito.when(recargaRepository.findAll()).thenReturn(recargaEntities); //cuando se llame
         RecargaPuerto recargaPuerto = new RecargaPersistenceAdapter(recargaRepository, new RecargaMapper(), new PersonaMapper());
-
-        var personaPuerto = Mockito.mock(PersonaPuerto.class); //simular repositorio
-        var httpPuerto = Mockito.mock(HttpPuerto.class); //simular repositorio
 
         // 2. Ejecución
         var recargaService = new RecargaService(personaPuerto, recargaPuerto, httpPuerto);
