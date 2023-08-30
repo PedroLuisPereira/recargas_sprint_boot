@@ -19,7 +19,7 @@ public class PersonaListar {
         this.personaService = personaService;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<PersonaRespuestaDto> ejecutar() {
 
         return personaService.listar().stream()
