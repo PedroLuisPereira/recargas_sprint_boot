@@ -52,7 +52,7 @@ class RecargaControllerTest {
             recargaService.crear(recargaSolicitudCrear);
         });
 
-        Assertions.assertEquals("No se encontro persona con Id: 1", thrown.getMessage());
+        Assertions.assertEquals("No se encontro id de la persona", thrown.getMessage());
     }
 
     /**

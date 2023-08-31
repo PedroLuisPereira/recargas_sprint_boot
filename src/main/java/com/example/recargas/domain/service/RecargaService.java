@@ -42,11 +42,10 @@ public class RecargaService {
           recargaSolicitudCrear.getOperador(),
           persona);
 
-
         SaldoDto saldoDto = httpSaldo.getSaldo();
 
         if (saldoDto != null && saldoDto.getid() * 3 < recargaSolicitudCrear.getValor()) {
-            throw new NoSaldoException("No se puede hacer la recaraga no hay saldo");
+            throw new NoSaldoException("No se puede hacer la recarga saldo insuficiente");
         }
 
         return recargaRepository.save(recarga);
