@@ -6,33 +6,33 @@ import com.example.recargas.domain.exception.NoSaldoException;
 import com.example.recargas.domain.exception.RegistroNotFoundException;
 import com.example.recargas.domain.model.Persona;
 import com.example.recargas.domain.model.Recarga;
-import com.example.recargas.domain.ports.HttpPuerto;
-import com.example.recargas.domain.ports.PersonaPuerto;
-import com.example.recargas.domain.ports.RecargaPuerto;
+import com.example.recargas.domain.ports.HttpSaldo;
+import com.example.recargas.domain.ports.PersonaRepository;
+import com.example.recargas.domain.ports.RecargaRepository;
 
 import java.util.List;
 
 
 public class RecargaService {
 
-    private final PersonaPuerto personaPuerto;
-    private final RecargaPuerto recargaPuerto;
-    private final HttpPuerto httpPuerto;
+    private final PersonaRepository personaRepository;
+    private final RecargaRepository recargaRepository;
+    private final HttpSaldo httpSaldo;
 
-    public RecargaService(PersonaPuerto personaPuerto, RecargaPuerto recargaPuerto, HttpPuerto httpPuerto
+    public RecargaService(PersonaRepository personaRepository, RecargaRepository recargaRepository, HttpSaldo httpSaldo
     ) {
-        this.personaPuerto = personaPuerto;
-        this.recargaPuerto = recargaPuerto;
-        this.httpPuerto = httpPuerto;
+        this.personaRepository = personaRepository;
+        this.recargaRepository = recargaRepository;
+        this.httpSaldo = httpSaldo;
     }
 
     public List<Recarga> listar() {
-        return recargaPuerto.list();
+        return recargaRepository.list();
     }
 
     public Recarga crear(RecargaSolicitudCrear recargaSolicitudCrear) {
 
-        Persona persona = personaPuerto.listarByid(recargaSolicitudCrear.getPersonaId())
+        Persona persona = personaRepository.listarByid(recargaSolicitudCrear.getPersonaId())
           .orElseThrow(() -> new RegistroNotFoundException("No se encontro id de la persona")
           );
 
@@ -43,13 +43,13 @@ public class RecargaService {
           persona);
 
 
-        SaldoDto saldoDto = httpPuerto.getSaldo();
+        SaldoDto saldoDto = httpSaldo.getSaldo();
 
         if (saldoDto != null && saldoDto.getid() * 3 < recargaSolicitudCrear.getValor()) {
             throw new NoSaldoException("No se puede hacer la recaraga no hay saldo");
         }
 
-        return recargaPuerto.save(recarga);
+        return recargaRepository.save(recarga);
     }
 
 }

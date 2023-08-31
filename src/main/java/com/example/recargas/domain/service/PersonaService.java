@@ -6,21 +6,19 @@ import com.example.recargas.domain.exception.RegistroNotFoundException;
 import com.example.recargas.domain.exception.RegistroDuplicadoException;
 import com.example.recargas.domain.model.Persona;
 import com.example.recargas.domain.model.Recarga;
-import com.example.recargas.domain.ports.PersonaPuerto;
-import com.example.recargas.domain.ports.RecargaPuerto;
+import com.example.recargas.domain.ports.PersonaRepository;
+import com.example.recargas.domain.ports.RecargaRepository;
 
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.apache.logging.log4j.ThreadContext.isEmpty;
-
 public class PersonaService {
 
-    private final PersonaPuerto personaRepositorio;
-    private final RecargaPuerto recargaRepositorio;
+    private final PersonaRepository personaRepositorio;
+    private final RecargaRepository recargaRepositorio;
 
-    public PersonaService(PersonaPuerto personaRepositorio, RecargaPuerto recargaRepositorio) {
+    public PersonaService(PersonaRepository personaRepositorio, RecargaRepository recargaRepositorio) {
         this.personaRepositorio = personaRepositorio;
         this.recargaRepositorio = recargaRepositorio;
     }

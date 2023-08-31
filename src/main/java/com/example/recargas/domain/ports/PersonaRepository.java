@@ -5,7 +5,7 @@ import com.example.recargas.domain.model.Persona;
 import java.util.List;
 import java.util.Optional;
 
-public interface PersonaPuerto {
+public interface PersonaRepository {
 
     List<Persona> listar();
 

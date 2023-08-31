@@ -1,8 +1,8 @@
 package com.example.recargas.infrastructure.config;
 
-import com.example.recargas.domain.ports.HttpPuerto;
-import com.example.recargas.domain.ports.PersonaPuerto;
-import com.example.recargas.domain.ports.RecargaPuerto;
+import com.example.recargas.domain.ports.HttpSaldo;
+import com.example.recargas.domain.ports.PersonaRepository;
+import com.example.recargas.domain.ports.RecargaRepository;
 import com.example.recargas.domain.service.PersonaService;
 import com.example.recargas.domain.service.RecargaService;
 import com.example.recargas.infrastructure.output.http.EmpresaAdapter;
@@ -10,8 +10,6 @@ import com.example.recargas.infrastructure.output.persistence.PersonaPersistence
 import com.example.recargas.infrastructure.output.persistence.RecargaPersistenceAdapter;
 import com.example.recargas.infrastructure.output.persistence.mapper.PersonaMapper;
 import com.example.recargas.infrastructure.output.persistence.mapper.RecargaMapper;
-import com.example.recargas.infrastructure.output.persistence.repository.PersonaRepository;
-import com.example.recargas.infrastructure.output.persistence.repository.RecargaRepository;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -41,13 +39,13 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public PersonaPersistenceAdapter personaPersistenceAdapter(PersonaRepository personaRepository,
+    public PersonaPersistenceAdapter personaPersistenceAdapter(com.example.recargas.infrastructure.output.persistence.repository.PersonaRepository personaRepository,
                                                                PersonaMapper productMapper) {
         return new PersonaPersistenceAdapter(personaRepository, productMapper);
     }
 
     @Bean
-    public PersonaService personaService(PersonaPersistenceAdapter personaPersistenceAdapter, RecargaPuerto recargaRepositorio) {
+    public PersonaService personaService(PersonaPersistenceAdapter personaPersistenceAdapter, RecargaRepository recargaRepositorio) {
         return new PersonaService(personaPersistenceAdapter, recargaRepositorio);
     }
 
@@ -57,15 +55,15 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public RecargaPersistenceAdapter recargaPersistenceAdapter(RecargaRepository recargaRepository,
+    public RecargaPersistenceAdapter recargaPersistenceAdapter(com.example.recargas.infrastructure.output.persistence.repository.RecargaRepository recargaRepository,
                                                                RecargaMapper recargaMapper, PersonaMapper personaMapper) {
         return new RecargaPersistenceAdapter(recargaRepository, recargaMapper, personaMapper);
     }
 
     @Bean
-    public RecargaService recargaService(PersonaPuerto personaRepositorio, RecargaPuerto recargaPuerto,
-                                         HttpPuerto httpPuerto) {
-        return new RecargaService(personaRepositorio, recargaPuerto, httpPuerto);
+    public RecargaService recargaService(PersonaRepository personaRepositorio, RecargaRepository recargaRepository,
+                                         HttpSaldo httpSaldo) {
+        return new RecargaService(personaRepositorio, recargaRepository, httpSaldo);
     }
 
     @Bean

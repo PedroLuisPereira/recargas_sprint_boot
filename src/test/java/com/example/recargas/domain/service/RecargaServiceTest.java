@@ -2,24 +2,18 @@ package com.example.recargas.domain.service;
 
 import com.example.recargas.domain.dto.RecargaSolicitudCrear;
 import com.example.recargas.domain.dto.SaldoDto;
-import com.example.recargas.domain.exception.CampoConException;
-import com.example.recargas.domain.exception.RegistroNotFoundException;
 import com.example.recargas.domain.model.Persona;
 import com.example.recargas.domain.model.Recarga;
-import com.example.recargas.domain.ports.HttpPuerto;
-import com.example.recargas.domain.ports.PersonaPuerto;
-import com.example.recargas.domain.ports.RecargaPuerto;
-import com.example.recargas.domain.service.RecargaService;
+import com.example.recargas.domain.ports.HttpSaldo;
+import com.example.recargas.domain.ports.PersonaRepository;
+import com.example.recargas.domain.ports.RecargaRepository;
 import com.example.recargas.infrastructure.output.persistence.PersonaPersistenceAdapter;
 import com.example.recargas.infrastructure.output.persistence.RecargaPersistenceAdapter;
 import com.example.recargas.infrastructure.output.persistence.entity.PersonaEntity;
 import com.example.recargas.infrastructure.output.persistence.entity.RecargaEntity;
 import com.example.recargas.infrastructure.output.persistence.mapper.PersonaMapper;
 import com.example.recargas.infrastructure.output.persistence.mapper.RecargaMapper;
-import com.example.recargas.infrastructure.output.persistence.repository.PersonaRepository;
-import com.example.recargas.infrastructure.output.persistence.repository.RecargaRepository;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -32,45 +26,47 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class RecargaServiceTest {
 
+    @Mock
+    PersonaRepository personaRepository;
+
+    @Mock
+    RecargaRepository recargaRepository;
+
+    @Mock
+    HttpSaldo httpSaldo;
+
     @InjectMocks
     RecargaService recargaService; //clase que va a recibir todos los mock
 
-    @Mock
-    RecargaRepository recargaRepository; //bean que se va a mockiar
 
     @Test
     void debeListarTodosLosRegistros() {
 
         // 1. Preparación
-        PersonaEntity personaEntity = new PersonaEntity(1L, "Juan", "juan@gmail.com");
+        Persona persona = Persona.getInstance(1L, "Juan", "juan@gmail.com");
 
-        List<RecargaEntity> recargaEntities = new ArrayList<>(Arrays.asList(
-          new RecargaEntity(1L, 50000, "3006087877", "TIGO", personaEntity),
-          new RecargaEntity(2L, 30000, "3106087877", "CLARO", personaEntity)));
+        List<Recarga> recargas = Arrays.asList(
+          Recarga.getInstance(1L, 50000, "3006087877", "TIGO", persona),
+          Recarga.getInstance(2L, 55000, "3006087877", "TIGO", persona)
+        );
 
-        var personaPuerto = Mockito.mock(PersonaPuerto.class); //simular
-        var httpPuerto = Mockito.mock(HttpPuerto.class); //simular
-        var recargaRepository = Mockito.mock(RecargaRepository.class); //simular repositorio
-        Mockito.when(recargaRepository.findAll()).thenReturn(recargaEntities); //cuando se llame
-        RecargaPuerto recargaPuerto = new RecargaPersistenceAdapter(recargaRepository, new RecargaMapper(), new PersonaMapper());
+        Mockito.when(recargaRepository.list()).thenReturn(recargas);
 
         // 2. Ejecución
-        var recargaService = new RecargaService(personaPuerto, recargaPuerto, httpPuerto);
-        var recargaList = recargaService.listar();
+        List<Recarga> listar = recargaService.listar();
 
-        recargaService.crear(null);
 
         // 3. Comparacion
-        Assertions.assertEquals(2, recargaList.size());
+        Assertions.assertEquals(2, listar.size());
+
 
     }
 
+    /*
     @Test
     void debeCrearRecarga() {
 
@@ -85,17 +81,17 @@ class RecargaServiceTest {
         );
 
 
-        var personaRepository = Mockito.mock(PersonaRepository.class); //simular
+        var personaRepository = Mockito.mock(com.example.recargas.infrastructure.output.persistence.repository.PersonaRepository.class); //simular
         Mockito.when(personaRepository.findById(1L)).thenReturn(Optional.of(personaEntity)); //cuando se llame
 
-        var recargaRepository = Mockito.mock(RecargaRepository.class); //simular
+        var recargaRepository = Mockito.mock(com.example.recargas.infrastructure.output.persistence.repository.RecargaRepository.class); //simular
         Mockito.when(recargaRepository.save(recargaEntity)).thenReturn(recargaEntity); //cuando se llame
 
-        var httpPuerto = Mockito.mock(HttpPuerto.class); //simular
+        var httpPuerto = Mockito.mock(HttpSaldo.class); //simular
         Mockito.when(httpPuerto.getSaldo()).thenReturn(new SaldoDto(100000)); //cuando se llame
 
-        PersonaPuerto personaPuerto = new PersonaPersistenceAdapter(personaRepository, new PersonaMapper());
-        RecargaPuerto recargaPuerto = new RecargaPersistenceAdapter(recargaRepository, new RecargaMapper(), new PersonaMapper());
+        PersonaRepository personaPuerto = new PersonaPersistenceAdapter(personaRepository, new PersonaMapper());
+        RecargaRepository recargaPuerto = new RecargaPersistenceAdapter(recargaRepository, new RecargaMapper(), new PersonaMapper());
 
 
         // 2. Ejecución

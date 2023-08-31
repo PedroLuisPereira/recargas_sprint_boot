@@ -1,10 +1,9 @@
 package com.example.recargas.infrastructure.output.persistence;
 
 import com.example.recargas.domain.model.Persona;
-import com.example.recargas.domain.ports.PersonaPuerto;
+import com.example.recargas.domain.ports.PersonaRepository;
 import com.example.recargas.infrastructure.output.persistence.entity.PersonaEntity;
 import com.example.recargas.infrastructure.output.persistence.mapper.PersonaMapper;
-import com.example.recargas.infrastructure.output.persistence.repository.PersonaRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -12,9 +11,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
-public class PersonaPersistenceAdapter implements PersonaPuerto {
+public class PersonaPersistenceAdapter implements PersonaRepository {
 
-    private final PersonaRepository productRepository;
+    private final com.example.recargas.infrastructure.output.persistence.repository.PersonaRepository productRepository;
 
     private final PersonaMapper productMapper;
 
