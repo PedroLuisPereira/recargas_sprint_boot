@@ -21,8 +21,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-@TestPropertySource(locations = "classpath:db-test.properties")
-@Sql("/test-mysql.sql")
+@TestPropertySource(locations = "classpath:db-test.properties") //bd de test
+@Sql("/test-mysql.sql") //consultas a ejecutar
 class RecargaUnitarioTest {
     @Autowired
     RecargaService recargaService;
