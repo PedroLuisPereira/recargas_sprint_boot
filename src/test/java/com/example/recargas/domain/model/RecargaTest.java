@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class RecargaTest {
 
     @Test
-    void debeCrearInstancia() {
+    void debeCrearRecarga() {
 
         Persona persona = Persona.getInstance(1L, "Juan", "juan@gmail.com");
 
@@ -28,7 +28,7 @@ class RecargaTest {
     }
 
     @Test
-    void debeCrearInstanciaConId() {
+    void debeCrearRecargaConId() {
 
         Persona persona = Persona.getInstance(1L, "Juan", "juan@gmail.com");
 
@@ -49,7 +49,7 @@ class RecargaTest {
     }
 
     @Test
-    void noDebeCrearInstanciaValorCero() {
+    void noDebeCrearRecargaValorCero() {
         Persona persona = Persona.getInstance(1L, "Juan", "juan@gmail.com");
 
         CampoConException thrown = Assertions.assertThrows(CampoConException.class, () -> {
@@ -65,7 +65,7 @@ class RecargaTest {
     }
 
     @Test
-    void noDebeCrearInstanciaCelularNull() {
+    void noDebeCrearRecargaCelularNull() {
         Persona persona = Persona.getInstance(1L, "Juan", "juan@gmail.com");
 
         CampoConException thrown = Assertions.assertThrows(CampoConException.class, () -> {
@@ -81,7 +81,7 @@ class RecargaTest {
     }
 
     @Test
-    void noDebeCrearInstanciaCelularError() {
+    void noDebeCrearRecargaCelularError() {
         Persona persona = Persona.getInstance(1L, "Juan", "juan@gmail.com");
 
         CampoConException thrown = Assertions.assertThrows(CampoConException.class, () -> {
@@ -97,7 +97,7 @@ class RecargaTest {
     }
 
     @Test
-    void noDebeCrearInstanciaOperadorNull() {
+    void noDebeCrearRecargaOperadorNull() {
         Persona persona = Persona.getInstance(1L, "Juan", "juan@gmail.com");
 
         CampoConException thrown = Assertions.assertThrows(CampoConException.class, () -> {
@@ -113,7 +113,7 @@ class RecargaTest {
     }
 
     @Test
-    void noDebeCrearInstanciaOperadorError() {
+    void noDebeCrearRecargaOperadorError() {
         Persona persona = Persona.getInstance(1L, "Juan", "juan@gmail.com");
 
         CampoConException thrown = Assertions.assertThrows(CampoConException.class, () -> {
@@ -129,7 +129,7 @@ class RecargaTest {
     }
 
     @Test
-    void noDebeCrearInstanciaOperadorCelular() {
+    void noDebeCrearRecargaOperadorCelular() {
         Persona persona = Persona.getInstance(1L, "Juan", "juan@gmail.com");
 
         CampoConException thrown = Assertions.assertThrows(CampoConException.class, () -> {
@@ -145,7 +145,7 @@ class RecargaTest {
     }
 
     @Test
-    void noDebeCrearInstanciaOperadorCelular2() {
+    void noDebeCrearRecargaOperadorCelular2() {
         Persona persona = Persona.getInstance(1L, "Juan", "juan@gmail.com");
 
         CampoConException thrown = Assertions.assertThrows(CampoConException.class, () -> {
@@ -161,7 +161,7 @@ class RecargaTest {
     }
 
     @Test
-    void noDebeCrearInstanciaPersonaNull() {
+    void noDebeCrearRecargaPersonaNull() {
         Persona persona = Persona.getInstance(1L, "Juan", "juan@gmail.com");
 
         CampoConException thrown = Assertions.assertThrows(CampoConException.class, () -> {

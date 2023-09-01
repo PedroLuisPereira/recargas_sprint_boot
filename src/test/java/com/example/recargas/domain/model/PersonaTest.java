@@ -1,6 +1,5 @@
 package com.example.recargas.domain.model;
 
-import com.example.recargas.domain.dto.PersonaSolicitudActualizar;
 import com.example.recargas.domain.exception.CampoConException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class PersonaTest {
 
     @Test
-    void debeCrearInstanciaNombreEmail() {
+    void debeCrearPersonaNombreEmail() {
 
         Persona persona = Persona.getInstance("Juan", "juan@gmail.com");
 
@@ -20,7 +19,7 @@ class PersonaTest {
     }
 
     @Test
-    void debeCrearInstanciaIdNombreEmail() {
+    void debeCrearPersonaIdNombreEmail() {
 
         Persona persona = Persona.getInstance(1L, "Juan", "juan@gmail.com");
 
@@ -31,10 +30,10 @@ class PersonaTest {
     }
 
     @Test
-    void noDebeCrearInstanciaNombreNull() {
+    void noDebeCrearPersonaNombreNull() {
 
         CampoConException thrown = Assertions.assertThrows(CampoConException.class, () -> {
-            Persona persona = Persona.getInstance(null, "juan@gmail.com");
+            Persona.getInstance(null, "juan@gmail.com");
         });
 
         Assertions.assertEquals("El campo nombre es obligatorio", thrown.getMessage());
@@ -42,10 +41,10 @@ class PersonaTest {
     }
 
     @Test
-    void noDebeCrearInstanciaEmailNull() {
+    void noDebeCrearPersonaEmailNull() {
 
         CampoConException thrown = Assertions.assertThrows(CampoConException.class, () -> {
-            Persona persona = Persona.getInstance("Juan", null);
+            Persona.getInstance("Juan", null);
         });
 
         Assertions.assertEquals("El campo email es obligatorio", thrown.getMessage());
