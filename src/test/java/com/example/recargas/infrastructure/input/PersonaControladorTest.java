@@ -7,7 +7,6 @@ import com.example.recargas.domain.model.Recarga;
 import com.example.recargas.domain.ports.RecargaRepository;
 import com.example.recargas.domain.service.PersonaService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -192,7 +191,6 @@ class PersonaControladorTest {
     }
 
     @Test
-    @Disabled
     void noDebeEliminarUnaPersonaTieneRecargas() throws Exception {
 
         PersonaSolicitudCrear personaSolicitudCrear = new PersonaSolicitudCrear("maria", "ana1@gmail.com");

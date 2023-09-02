@@ -40,7 +40,7 @@ class RecargaServiceTest {
 
 
     @Test
-    void debeListarTodosLosRegistros() {
+    void debeListarTodosLasRecargas() {
 
         // 1. Preparación
         Persona persona = Persona.getInstance(1L, "Juan", "juan@gmail.com");
@@ -61,7 +61,7 @@ class RecargaServiceTest {
     }
 
     @Test
-    void debeCrearUnNuevoRegistro() {
+    void debeCrearUnaNuevaRecarga() {
 
         // 1. Preparación
         RecargaSolicitudCrear recargaSolicitudCrear = new RecargaSolicitudCrear(
@@ -92,7 +92,7 @@ class RecargaServiceTest {
     }
 
     @Test
-    void debeLanzarErrorAlCrearUnNuevoRegistroPersonaNoExite() {
+    void debeLanzarErrorPersonaNoExite() {
 
         // 1. Preparación
         RecargaSolicitudCrear recargaSolicitudCrear = new RecargaSolicitudCrear(
@@ -125,7 +125,7 @@ class RecargaServiceTest {
     }
 
     @Test
-    void debeLanzarErrorAlCrearUnNuevoRegistroSinSaldo() {
+    void debeLanzarErrorSinSaldo() {
 
         // 1. Preparación
         RecargaSolicitudCrear recargaSolicitudCrear = new RecargaSolicitudCrear(
