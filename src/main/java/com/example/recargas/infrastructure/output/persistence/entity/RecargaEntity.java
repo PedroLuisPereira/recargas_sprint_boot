@@ -26,5 +26,4 @@ public class RecargaEntity {
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private PersonaEntity personaEntity;
-    
 }
