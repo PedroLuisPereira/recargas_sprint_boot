@@ -1,88 +1,94 @@
 package com.example.recargas.infrastructure.input;
 
-import com.example.recargas.domain.dto.RecargaSolicitudCrear;
-import com.example.recargas.domain.exception.RegistroNotFoundException;
-import com.example.recargas.domain.model.Persona;
-import com.example.recargas.domain.service.RecargaService;
-import com.example.recargas.infrastructure.output.persistence.PersonaPersistenceAdapter;
-import com.example.recargas.infrastructure.output.persistence.RecargaPersistenceAdapter;
-import org.junit.jupiter.api.Assertions;
+
+import com.example.recargas.application.persona.dto.PersonaCrearDto;
+import com.example.recargas.application.recarga.dto.RecargaCrearDto;
+import com.example.recargas.domain.dto.SaldoDto;
+import com.example.recargas.domain.ports.HttpSaldo;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 
-import java.util.Optional;
+import static org.hamcrest.Matchers.is;
 
-import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 
 @SpringBootTest
+@AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:db-test.properties")
+@Sql("/test-mysql.sql")
 class RecargaControllerTest {
 
-    @MockBean
-    PersonaPersistenceAdapter personaPersistenceAdapter;
-
-    @MockBean
-    RecargaPersistenceAdapter recargaPersistenceAdapter;
-
     @Autowired
-    RecargaService recargaService;
+    private MockMvc mockMvc;
 
+    @MockBean
+    HttpSaldo httpSaldo;
 
-    /**
-     * Simulando beans
-     */
+//
+//    @Autowired
+//    PersonaService personaService;
+//
+//    @Autowired
+//    RecargaRepository recargaRepository;
+
     @Test
-    void debeRetornarErrorPersonaNoExiste() {
+    void debeListarTodasLasRecargas() throws Exception {
 
-        when(personaPersistenceAdapter.listarByid(1L)).thenReturn(Optional.empty());
-
-        RecargaSolicitudCrear recargaSolicitudCrear = new RecargaSolicitudCrear(
-          1,
-          "3006087877",
-          "TIGO",
-          1L
-        );
-
-        RegistroNotFoundException thrown = Assertions.assertThrows(RegistroNotFoundException.class, () -> {
-            recargaService.crear(recargaSolicitudCrear);
-        });
-
-        Assertions.assertEquals("No se encontro id de la persona", thrown.getMessage());
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/recargas").contentType(MediaType.APPLICATION_JSON))
+          .andExpect(MockMvcResultMatchers
+            .status()
+            .isOk())
+          .andExpect(MockMvcResultMatchers
+            .content()
+            .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+          .andExpect(jsonPath("$[0].celular", is("3001234567")))
+          .andExpect(jsonPath("$.length()").value(3));
     }
 
-    /**
-     * Simulando Bean
-     */
-    //@Test
-    void debeCrearUnaRecarga() {
-        when(personaPersistenceAdapter.listarByid(20)).thenReturn(Optional.of(Persona.getInstance(
-          20,
-          "Juan",
-          "juan@gmail.com"
-        )));
+    @Test
+    void debeCrearUnaRecarga() throws Exception {
 
-        //Recarga recarga = Recarga.getInstance(6000, "3006087877", "TIGO", 20);
+        Mockito.when(httpSaldo.getSaldo()).thenReturn(new SaldoDto(100000));
 
-//        when(recargaPersistenceAdapter.save(recarga)).thenReturn(
-//          Recarga.getInstance(20, 6000, "3006087877", "TIGO", 20)
-//        );
 
-        RecargaSolicitudCrear recargaSolicitudCrear = new RecargaSolicitudCrear(
-          6000,
-          "3006087877",
-          "TIGO",
-          20
-        );
+        RecargaCrearDto recargaCrearDto = new RecargaCrearDto(20000,"3001234567","TIGO", 1L);
 
-//        recarga = recargaService.crear(recargaSolicitudCrear);
-//
-//        Assertions.assertEquals("3006087877", recarga.getCelular());
-//        Assertions.assertEquals(6000, recarga.getValor());
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/recargas")
+            .content(asJsonString(recargaCrearDto))
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON))
+          .andExpect(MockMvcResultMatchers
+            .status()
+            .isCreated())
+          .andExpect(MockMvcResultMatchers
+            .content()
+            .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+          .andExpect(jsonPath("$.celular", is("3001234567")));
+
+    }
+
+
+    private static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

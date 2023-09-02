@@ -25,7 +25,7 @@ import static org.hamcrest.Matchers.is;
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:db-test.properties")
 @Sql("/test-mysql.sql")
-class PersonaControladorTest {
+class PersonaControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -93,7 +93,6 @@ class PersonaControladorTest {
             .content()
             .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
           .andExpect(jsonPath("$.nombre", is("Ana")));
-        ;
     }
 
     @Test
