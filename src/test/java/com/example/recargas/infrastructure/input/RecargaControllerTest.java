@@ -39,12 +39,6 @@ class RecargaControllerTest {
     @MockBean
     HttpSaldo httpSaldo;
 
-//
-//    @Autowired
-//    PersonaService personaService;
-//
-//    @Autowired
-//    RecargaRepository recargaRepository;
 
     @Test
     void debeListarTodasLasRecargas() throws Exception {
@@ -63,8 +57,8 @@ class RecargaControllerTest {
     @Test
     void debeCrearUnaRecarga() throws Exception {
 
+        //simular un servicio externo
         Mockito.when(httpSaldo.getSaldo()).thenReturn(new SaldoDto(100000));
-
 
         RecargaCrearDto recargaCrearDto = new RecargaCrearDto(20000,"3001234567","TIGO", 1L);
 
