@@ -21,9 +21,9 @@ public class PersonaCrear {
     @Transactional
     public PersonaRespuestaDto ejecutar(PersonaCrearDto personaCrearDto) {
 
-        PersonaSolicitudCrear personaSolicitud = PersonaTransformador.trasnformar(personaCrearDto);
+        PersonaSolicitudCrear personaSolicitud = PersonaTransformador.transformar(personaCrearDto);
         Persona persona = personaService.crear(personaSolicitud);
-        return PersonaTransformador.trasnformar(persona);
+        return PersonaTransformador.transformar(persona);
 
     }
 }

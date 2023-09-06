@@ -23,7 +23,7 @@ public class PersonaListar {
     public List<PersonaRespuestaDto> ejecutar() {
 
         return personaService.listar().stream()
-          .map(PersonaTransformador::trasnformar)
+          .map(PersonaTransformador::transformar)
           .collect(Collectors.toList()
           );
           

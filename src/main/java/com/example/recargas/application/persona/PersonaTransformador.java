@@ -8,14 +8,14 @@ import com.example.recargas.domain.model.Persona;
 
 public class PersonaTransformador {
 
-    public static PersonaSolicitudCrear trasnformar(PersonaCrearDto personaCrearDto) {
+    public static PersonaSolicitudCrear transformar(PersonaCrearDto personaCrearDto) {
         return new PersonaSolicitudCrear(
           personaCrearDto.getNombre(),
           personaCrearDto.getEmail()
         );
     }
 
-    public static PersonaSolicitudActualizar trasnformar(long id, PersonaCrearDto personaCrearDto) {
+    public static PersonaSolicitudActualizar transformar(long id, PersonaCrearDto personaCrearDto) {
         return new PersonaSolicitudActualizar(
           id,
           personaCrearDto.getNombre(),
@@ -23,7 +23,7 @@ public class PersonaTransformador {
         );
     }
 
-    public static PersonaRespuestaDto trasnformar(Persona persona) {
+    public static PersonaRespuestaDto transformar(Persona persona) {
         return new PersonaRespuestaDto(
           persona.getId(),
           persona.getNombre(),

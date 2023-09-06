@@ -17,7 +17,7 @@ public class PersonaListarById {
 
     @Transactional
     public PersonaRespuestaDto ejecutar(long id) {
-        return PersonaTransformador.trasnformar(personaService.listarById(id));
+        return PersonaTransformador.transformar(personaService.listarById(id));
     }
 
 
