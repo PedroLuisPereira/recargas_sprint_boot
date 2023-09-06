@@ -25,6 +25,7 @@ dependencies {
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.1.1'
+	// implementation group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version: '2.7.14'
 }
 
 tasks.named('test') {
