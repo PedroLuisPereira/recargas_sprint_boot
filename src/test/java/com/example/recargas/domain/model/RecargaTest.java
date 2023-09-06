@@ -53,7 +53,7 @@ class RecargaTest {
         Persona persona = Persona.getInstance(1L, "Juan", "juan@gmail.com");
 
         CampoConException thrown = Assertions.assertThrows(CampoConException.class, () -> {
-            Recarga recarga = Recarga.getInstance(
+            Recarga.getInstance(
               0,
               "3105220305",
               "CLARO",
@@ -69,7 +69,7 @@ class RecargaTest {
         Persona persona = Persona.getInstance(1L, "Juan", "juan@gmail.com");
 
         CampoConException thrown = Assertions.assertThrows(CampoConException.class, () -> {
-            Recarga recarga = Recarga.getInstance(
+            Recarga.getInstance(
               2000,
               null,
               "CLARO",
@@ -85,7 +85,7 @@ class RecargaTest {
         Persona persona = Persona.getInstance(1L, "Juan", "juan@gmail.com");
 
         CampoConException thrown = Assertions.assertThrows(CampoConException.class, () -> {
-            Recarga recarga = Recarga.getInstance(
+            Recarga.getInstance(
               2000,
               "566",
               "CLARO",
@@ -101,7 +101,7 @@ class RecargaTest {
         Persona persona = Persona.getInstance(1L, "Juan", "juan@gmail.com");
 
         CampoConException thrown = Assertions.assertThrows(CampoConException.class, () -> {
-            Recarga recarga = Recarga.getInstance(
+            Recarga.getInstance(
               2000,
               "3105220305",
               null,
@@ -117,7 +117,7 @@ class RecargaTest {
         Persona persona = Persona.getInstance(1L, "Juan", "juan@gmail.com");
 
         CampoConException thrown = Assertions.assertThrows(CampoConException.class, () -> {
-            Recarga recarga = Recarga.getInstance(
+            Recarga.getInstance(
               2000,
               "3105220305",
               "XXX",
@@ -133,7 +133,7 @@ class RecargaTest {
         Persona persona = Persona.getInstance(1L, "Juan", "juan@gmail.com");
 
         CampoConException thrown = Assertions.assertThrows(CampoConException.class, () -> {
-            Recarga recarga = Recarga.getInstance(
+            Recarga.getInstance(
               2000,
               "3105220305",
               "TIGO",
@@ -149,7 +149,7 @@ class RecargaTest {
         Persona persona = Persona.getInstance(1L, "Juan", "juan@gmail.com");
 
         CampoConException thrown = Assertions.assertThrows(CampoConException.class, () -> {
-            Recarga recarga = Recarga.getInstance(
+            Recarga.getInstance(
               2000,
               "3005220305",
               "MOVISTAR",
@@ -162,10 +162,10 @@ class RecargaTest {
 
     @Test
     void noDebeCrearRecargaPersonaNull() {
-        Persona persona = Persona.getInstance(1L, "Juan", "juan@gmail.com");
+        Persona.getInstance(1L, "Juan", "juan@gmail.com");
 
         CampoConException thrown = Assertions.assertThrows(CampoConException.class, () -> {
-            Recarga recarga = Recarga.getInstance(
+            Recarga.getInstance(
               2000,
               "3105220305",
               "CLARO",

@@ -131,7 +131,7 @@ class PersonaServiceTest {
         personaService.eliminar(persona.getId());
 
         RegistroNotFoundException thrown = Assertions.assertThrows(RegistroNotFoundException.class, () -> {
-            Persona personas = personaService.listarById(persona.getId());
+            personaService.listarById(persona.getId());
         });
 
         Assertions.assertEquals("No se encontro persona con ese Id", thrown.getMessage());

@@ -120,7 +120,7 @@ class PersonaControllerTest {
     void noDebeActualizarUnaPersonaNoExiste() throws Exception {
 
         PersonaSolicitudCrear personaSolicitudCrear = new PersonaSolicitudCrear("Ana Maria", "ana1@gmail.com");
-        Persona persona = personaService.crear(personaSolicitudCrear);
+        personaService.crear(personaSolicitudCrear);
 
         PersonaCrearDto personaCrearDto = new PersonaCrearDto("Ana Maria", "ana1@gmail.com");
 
