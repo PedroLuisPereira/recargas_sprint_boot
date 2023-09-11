@@ -1,5 +1,6 @@
 package com.example.recargas.infrastructure.output.http;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.example.recargas.application.recarga.dto.RecargaSaldoDto;
@@ -7,6 +8,7 @@ import com.example.recargas.domain.dto.SaldoDto;
 import com.example.recargas.domain.ports.HttpSaldo;
 
 @Service
+@Primary
 public class Saldo implements HttpSaldo {
 
     private final SaldoFeignClient saldoFeignClient;

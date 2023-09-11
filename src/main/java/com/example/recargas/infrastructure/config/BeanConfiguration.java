@@ -66,9 +66,9 @@ public class BeanConfiguration {
         return new RecargaService(personaRepositorio, recargaRepository, httpSaldo);
     }
 
-    // @Bean
-    // public EmpresaAdapter empresaAdapter(RestTemplate restTemplate) {
-    //     return new EmpresaAdapter(restTemplate);
-    // }
+    @Bean
+    public EmpresaAdapter empresaAdapter(RestTemplate restTemplate) {
+        return new EmpresaAdapter(restTemplate);
+    }
 
 }
