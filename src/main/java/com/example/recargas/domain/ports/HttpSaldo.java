@@ -4,6 +4,6 @@ import com.example.recargas.domain.dto.SaldoDto;
 
 public interface HttpSaldo {
 
-    SaldoDto getSaldo();
+    SaldoDto getSaldo(String operador);
 
 }

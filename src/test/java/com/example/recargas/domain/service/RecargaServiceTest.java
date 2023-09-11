@@ -22,6 +22,7 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 
 @SpringBootTest
 class RecargaServiceTest {
@@ -80,7 +81,7 @@ class RecargaServiceTest {
         );
 
         Mockito.when(personaRepository.listarByid(anyLong())).thenReturn(Optional.of(persona));
-        Mockito.when(httpSaldo.getSaldo()).thenReturn(new SaldoDto(500000));
+        Mockito.when(httpSaldo.getSaldo(anyString())).thenReturn(new SaldoDto(500000));
         Mockito.when(recargaRepository.save(any())).thenReturn(recarga);
 
         // 2. Ejecución
@@ -111,7 +112,7 @@ class RecargaServiceTest {
         );
 
         Mockito.when(personaRepository.listarByid(anyLong())).thenReturn(Optional.empty());
-        Mockito.when(httpSaldo.getSaldo()).thenReturn(new SaldoDto(500000));
+        Mockito.when(httpSaldo.getSaldo(anyString())).thenReturn(new SaldoDto(500000));
         Mockito.when(recargaRepository.save(any())).thenReturn(recarga);
 
         // 2. Ejecución
@@ -144,7 +145,7 @@ class RecargaServiceTest {
         );
 
         Mockito.when(personaRepository.listarByid(anyLong())).thenReturn(Optional.of(persona));
-        Mockito.when(httpSaldo.getSaldo()).thenReturn(new SaldoDto(5));
+        Mockito.when(httpSaldo.getSaldo(anyString())).thenReturn(new SaldoDto(5));
         Mockito.when(recargaRepository.save(any())).thenReturn(recarga);
 
         // 2. Ejecución

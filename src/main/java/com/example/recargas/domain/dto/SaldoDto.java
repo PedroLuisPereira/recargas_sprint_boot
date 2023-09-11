@@ -2,26 +2,26 @@ package com.example.recargas.domain.dto;
 
 public class SaldoDto {
 
-    double id;
+    double valor;
 
     public SaldoDto() {
     }
 
-    public SaldoDto(double id) {
-        this.id = id;
+    public SaldoDto(double valor) {
+        this.valor = valor;
     }
 
-    public double getid() {
-        return id;
+    public double getValor() {
+        return valor;
     }
 
-    public void setid(double id) {
-        this.id = id;
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
     @Override
     public String toString() {
-        return "idDto [id=" + id + "]";
+        return "SaldoDto [valor=" + valor + "]";
     }
 
 

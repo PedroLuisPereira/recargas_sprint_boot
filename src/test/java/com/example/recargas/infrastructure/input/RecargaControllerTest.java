@@ -20,7 +20,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.hamcrest.Matchers.is;
-
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @SpringBootTest
@@ -53,7 +53,7 @@ class RecargaControllerTest {
   void debeCrearUnaRecarga() throws Exception {
 
     // simular un servicio externo
-    Mockito.when(httpSaldo.getSaldo()).thenReturn(new SaldoDto(100000));
+    Mockito.when(httpSaldo.getSaldo(anyString())).thenReturn(new SaldoDto(100000));
 
     RecargaCrearDto recargaCrearDto = new RecargaCrearDto(20000, "3001234567", "TIGO", 1L);
 
