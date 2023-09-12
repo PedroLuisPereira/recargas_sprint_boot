@@ -5,11 +5,11 @@ import org.springframework.stereotype.Service;
 
 import com.example.recargas.application.recarga.dto.RecargaSaldoDto;
 import com.example.recargas.domain.dto.SaldoDto;
-import com.example.recargas.domain.ports.HttpSaldo;
+import com.example.recargas.domain.ports.RecargaHttpSaldo;
 
 @Service
 @Primary
-public class Saldo implements HttpSaldo {
+public class Saldo implements RecargaHttpSaldo {
 
     private final SaldoFeignClient saldoFeignClient;
 

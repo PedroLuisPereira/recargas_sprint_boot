@@ -1,4 +1,4 @@
-package com.example.recargas.infrastructure.config;
+package com.example.recargas.infrastructure.output.message;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,6 +6,9 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+/**
+ * Enviar mensaje en string
+ */
 @Service
 public class RabbitMQProducer {
 
@@ -23,7 +26,7 @@ public class RabbitMQProducer {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void sendMessage(String message){
+    public void sendMessage(String message) {
         LOGGER.info(String.format("Message sent -> %s", message));
         rabbitTemplate.convertAndSend(exchange, routingKey, message);
     }

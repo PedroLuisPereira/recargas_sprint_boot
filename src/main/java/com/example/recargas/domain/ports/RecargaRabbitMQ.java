@@ -3,7 +3,7 @@ package com.example.recargas.domain.ports;
 import com.example.recargas.domain.dto.CompraDto;
 
 
-public interface CompraMensaje {
+public interface RecargaRabbitMQ {
 
     void  sendCompra(CompraDto compraDto);
 

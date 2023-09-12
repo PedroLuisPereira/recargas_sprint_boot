@@ -7,8 +7,8 @@ import com.example.recargas.domain.exception.NoSaldoException;
 import com.example.recargas.domain.exception.RegistroNotFoundException;
 import com.example.recargas.domain.model.Persona;
 import com.example.recargas.domain.model.Recarga;
-import com.example.recargas.domain.ports.CompraMensaje;
-import com.example.recargas.domain.ports.HttpSaldo;
+import com.example.recargas.domain.ports.RecargaRabbitMQ;
+import com.example.recargas.domain.ports.RecargaHttpSaldo;
 import com.example.recargas.domain.ports.PersonaRepository;
 import com.example.recargas.domain.ports.RecargaRepository;
 
@@ -18,13 +18,13 @@ public class RecargaService {
 
     private final PersonaRepository personaRepository;
     private final RecargaRepository recargaRepository;
-    private final HttpSaldo httpSaldo;
-    private final CompraMensaje compraMensaje;
+    private final RecargaHttpSaldo httpSaldo;
+    private final RecargaRabbitMQ compraMensaje;
 
     public RecargaService(PersonaRepository personaRepository,
             RecargaRepository recargaRepository,
-            HttpSaldo httpSaldo,
-            CompraMensaje compraMensaje) {
+            RecargaHttpSaldo httpSaldo,
+            RecargaRabbitMQ compraMensaje) {
         this.personaRepository = personaRepository;
         this.recargaRepository = recargaRepository;
         this.httpSaldo = httpSaldo;

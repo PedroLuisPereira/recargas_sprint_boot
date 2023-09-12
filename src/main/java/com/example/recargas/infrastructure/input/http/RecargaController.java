@@ -1,4 +1,4 @@
-package com.example.recargas.infrastructure.input;
+package com.example.recargas.infrastructure.input.http;
 
 import com.example.recargas.application.recarga.consulta.RecargaListar;
 import org.springframework.http.HttpStatus;

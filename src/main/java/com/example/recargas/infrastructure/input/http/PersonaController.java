@@ -1,4 +1,4 @@
-package com.example.recargas.infrastructure.input;
+package com.example.recargas.infrastructure.input.http;
 
 import java.util.List;
 

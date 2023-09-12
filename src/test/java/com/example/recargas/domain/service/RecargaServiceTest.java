@@ -6,7 +6,7 @@ import com.example.recargas.domain.exception.NoSaldoException;
 import com.example.recargas.domain.exception.RegistroNotFoundException;
 import com.example.recargas.domain.model.Persona;
 import com.example.recargas.domain.model.Recarga;
-import com.example.recargas.domain.ports.HttpSaldo;
+import com.example.recargas.domain.ports.RecargaHttpSaldo;
 import com.example.recargas.domain.ports.PersonaRepository;
 import com.example.recargas.domain.ports.RecargaRepository;
 import org.junit.jupiter.api.Assertions;
@@ -34,7 +34,7 @@ class RecargaServiceTest {
     RecargaRepository recargaRepository;
 
     @Mock
-    HttpSaldo httpSaldo;
+    RecargaHttpSaldo httpSaldo;
 
     @InjectMocks
     RecargaService recargaService; //clase que va a recibir todos los mock

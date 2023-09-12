@@ -1,4 +1,4 @@
-package com.example.recargas.infrastructure.output.message;
+package com.example.recargas.infrastructure.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Value;

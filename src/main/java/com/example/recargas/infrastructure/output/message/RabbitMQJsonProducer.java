@@ -1,6 +1,5 @@
 package com.example.recargas.infrastructure.output.message;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -8,11 +7,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.example.recargas.domain.dto.CompraDto;
-import com.example.recargas.domain.ports.CompraMensaje;
-import com.example.recargas.infrastructure.config.User;
+import com.example.recargas.domain.ports.RecargaRabbitMQ;
 
+/**
+ * Enviar mensaje en json
+ */
 @Service
-public class RabbitMQJsonProducer implements CompraMensaje {
+public class RabbitMQJsonProducer implements RecargaRabbitMQ {
 
     @Value("${rabbitmq.exchange.name}")
     private String exchange;
@@ -26,11 +27,6 @@ public class RabbitMQJsonProducer implements CompraMensaje {
 
     public RabbitMQJsonProducer(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
-    }
-
-    public void sendJsonMessage(User user){
-        LOGGER.info(String.format("Json message sent -> %s", user.toString()));
-        rabbitTemplate.convertAndSend(exchange, routingJsonKey, user);
     }
 
     @Override

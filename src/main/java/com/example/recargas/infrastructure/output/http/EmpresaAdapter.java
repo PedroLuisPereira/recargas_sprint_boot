@@ -1,10 +1,10 @@
 package com.example.recargas.infrastructure.output.http;
 
 import com.example.recargas.domain.dto.SaldoDto;
-import com.example.recargas.domain.ports.HttpSaldo;
+import com.example.recargas.domain.ports.RecargaHttpSaldo;
 import org.springframework.web.client.RestTemplate;
 
-public class EmpresaAdapter implements HttpSaldo {
+public class EmpresaAdapter implements RecargaHttpSaldo {
 
     private final RestTemplate restTemplate;
 

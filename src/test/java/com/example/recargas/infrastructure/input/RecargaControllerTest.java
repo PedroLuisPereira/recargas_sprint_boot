@@ -2,7 +2,7 @@ package com.example.recargas.infrastructure.input;
 
 import com.example.recargas.application.recarga.dto.RecargaCrearDto;
 import com.example.recargas.domain.dto.SaldoDto;
-import com.example.recargas.domain.ports.HttpSaldo;
+import com.example.recargas.domain.ports.RecargaHttpSaldo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +33,7 @@ class RecargaControllerTest {
   private MockMvc mockMvc;
 
   @MockBean
-  HttpSaldo httpSaldo;
+  RecargaHttpSaldo httpSaldo;
 
   @Test
   void debeListarTodasLasRecargas() throws Exception {
