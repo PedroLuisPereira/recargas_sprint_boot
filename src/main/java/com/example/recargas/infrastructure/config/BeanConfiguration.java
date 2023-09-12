@@ -1,5 +1,6 @@
 package com.example.recargas.infrastructure.config;
 
+import com.example.recargas.domain.ports.CompraMensaje;
 import com.example.recargas.domain.ports.HttpSaldo;
 import com.example.recargas.domain.ports.PersonaRepository;
 import com.example.recargas.domain.ports.RecargaRepository;
@@ -62,8 +63,8 @@ public class BeanConfiguration {
 
     @Bean
     public RecargaService recargaService(PersonaRepository personaRepositorio, RecargaRepository recargaRepository,
-                                         HttpSaldo httpSaldo) {
-        return new RecargaService(personaRepositorio, recargaRepository, httpSaldo);
+                                         HttpSaldo httpSaldo, CompraMensaje compraMensaje ) {
+        return new RecargaService(personaRepositorio, recargaRepository, httpSaldo, compraMensaje);
     }
 
     @Bean

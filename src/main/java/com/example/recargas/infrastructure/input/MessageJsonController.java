@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.recargas.infrastructure.config.RabbitMQJsonProducer;
 import com.example.recargas.infrastructure.config.User;
+import com.example.recargas.infrastructure.output.message.RabbitMQJsonProducer;
 
 @RestController
 @RequestMapping("/api/v1")
