@@ -7,6 +7,7 @@ import com.example.recargas.domain.exception.RegistroNotFoundException;
 import com.example.recargas.domain.model.Persona;
 import com.example.recargas.domain.model.Recarga;
 import com.example.recargas.domain.ports.RecargaHttpSaldo;
+import com.example.recargas.domain.ports.RecargaRabbitMQ;
 import com.example.recargas.domain.ports.PersonaRepository;
 import com.example.recargas.domain.ports.RecargaRepository;
 import org.junit.jupiter.api.Assertions;
@@ -24,6 +25,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 
+
 @SpringBootTest
 class RecargaServiceTest {
 
@@ -35,6 +37,9 @@ class RecargaServiceTest {
 
     @Mock
     RecargaHttpSaldo httpSaldo;
+
+    @Mock
+    RecargaRabbitMQ recargaRabbitMQ;
 
     @InjectMocks
     RecargaService recargaService; //clase que va a recibir todos los mock
@@ -83,6 +88,7 @@ class RecargaServiceTest {
         Mockito.when(personaRepository.listarByid(anyLong())).thenReturn(Optional.of(persona));
         Mockito.when(httpSaldo.getSaldo(anyString())).thenReturn(new SaldoDto(500000));
         Mockito.when(recargaRepository.save(any())).thenReturn(recarga);
+        Mockito.doNothing().when(recargaRabbitMQ).sendCompra(null);
 
         // 2. Ejecución
         Recarga respuesta = recargaService.crear(recargaSolicitudCrear);

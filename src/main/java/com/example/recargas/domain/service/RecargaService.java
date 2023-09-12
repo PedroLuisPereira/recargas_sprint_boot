@@ -19,16 +19,16 @@ public class RecargaService {
     private final PersonaRepository personaRepository;
     private final RecargaRepository recargaRepository;
     private final RecargaHttpSaldo httpSaldo;
-    private final RecargaRabbitMQ compraMensaje;
+    private final RecargaRabbitMQ recargaRabbitMQ;
 
     public RecargaService(PersonaRepository personaRepository,
             RecargaRepository recargaRepository,
             RecargaHttpSaldo httpSaldo,
-            RecargaRabbitMQ compraMensaje) {
+            RecargaRabbitMQ recargaRabbitMQ) {
         this.personaRepository = personaRepository;
         this.recargaRepository = recargaRepository;
         this.httpSaldo = httpSaldo;
-        this.compraMensaje = compraMensaje;
+        this.recargaRabbitMQ = recargaRabbitMQ;
     }
 
     public List<Recarga> listar() {
@@ -54,7 +54,7 @@ public class RecargaService {
 
         recarga = recargaRepository.save(recarga);
 
-        compraMensaje.sendCompra(new CompraDto(recarga.getOperador(), recarga.getValor()));
+        recargaRabbitMQ.sendCompra(new CompraDto(recarga.getOperador(), recarga.getValor()));
 
         return recarga;
 
