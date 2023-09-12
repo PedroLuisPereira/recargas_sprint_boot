@@ -4,11 +4,11 @@ import com.example.recargas.domain.dto.SaldoDto;
 import com.example.recargas.domain.ports.RecargaHttpSaldo;
 import org.springframework.web.client.RestTemplate;
 
-public class EmpresaAdapter implements RecargaHttpSaldo {
+public class RecargaRestTemplateAdapter implements RecargaHttpSaldo {
 
     private final RestTemplate restTemplate;
 
-    public EmpresaAdapter(RestTemplate restTemplate) {
+    public RecargaRestTemplateAdapter(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 

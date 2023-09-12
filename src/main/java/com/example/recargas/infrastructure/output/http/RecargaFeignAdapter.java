@@ -9,11 +9,11 @@ import com.example.recargas.domain.ports.RecargaHttpSaldo;
 
 @Service
 @Primary
-public class Saldo implements RecargaHttpSaldo {
+public class RecargaFeignAdapter implements RecargaHttpSaldo {
 
     private final SaldoFeignClient saldoFeignClient;
 
-    public Saldo(SaldoFeignClient saldoFeignClient) {
+    public RecargaFeignAdapter(SaldoFeignClient saldoFeignClient) {
         this.saldoFeignClient = saldoFeignClient;
     }
 
