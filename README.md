@@ -12,3 +12,6 @@ https://www.javaguides.net/2022/07/spring-boot-rabbitmq-producer-and-consumer-ex
 
 # Instalación
 docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.12-management
+
+### Resilience4j
+https://javatechonline.com/how-to-implement-fault-tolerance-in-microservices-using-resilience4j/
