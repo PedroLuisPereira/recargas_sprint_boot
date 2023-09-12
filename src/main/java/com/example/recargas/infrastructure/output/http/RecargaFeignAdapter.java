@@ -7,14 +7,15 @@ import org.springframework.stereotype.Service;
 
 import com.example.recargas.application.recarga.dto.RecargaSaldoDto;
 import com.example.recargas.domain.dto.SaldoDto;
-import com.example.recargas.domain.ports.RecargaHttpSaldo;
+import com.example.recargas.domain.ports.RecargaSaldoHttp;
 import com.example.recargas.infrastructure.input.http.resilience4j.CircuitBreakerController;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 @Service
 @Primary
-public class RecargaFeignAdapter implements RecargaHttpSaldo {
+
+public class RecargaFeignAdapter implements RecargaSaldoHttp {
 
     Logger logger = LoggerFactory.getLogger(CircuitBreakerController.class);
 

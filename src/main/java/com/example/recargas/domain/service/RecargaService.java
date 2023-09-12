@@ -8,9 +8,10 @@ import com.example.recargas.domain.exception.RegistroNotFoundException;
 import com.example.recargas.domain.model.Persona;
 import com.example.recargas.domain.model.Recarga;
 import com.example.recargas.domain.ports.RecargaRabbitMQ;
-import com.example.recargas.domain.ports.RecargaHttpSaldo;
+
 import com.example.recargas.domain.ports.PersonaRepository;
 import com.example.recargas.domain.ports.RecargaRepository;
+import com.example.recargas.domain.ports.RecargaSaldoHttp;
 
 import java.util.List;
 
@@ -18,12 +19,12 @@ public class RecargaService {
 
     private final PersonaRepository personaRepository;
     private final RecargaRepository recargaRepository;
-    private final RecargaHttpSaldo httpSaldo;
+    private final RecargaSaldoHttp httpSaldo;
     private final RecargaRabbitMQ recargaRabbitMQ;
 
     public RecargaService(PersonaRepository personaRepository,
             RecargaRepository recargaRepository,
-            RecargaHttpSaldo httpSaldo,
+            RecargaSaldoHttp httpSaldo,
             RecargaRabbitMQ recargaRabbitMQ) {
         this.personaRepository = personaRepository;
         this.recargaRepository = recargaRepository;

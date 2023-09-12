@@ -6,10 +6,11 @@ import com.example.recargas.domain.exception.NoSaldoException;
 import com.example.recargas.domain.exception.RegistroNotFoundException;
 import com.example.recargas.domain.model.Persona;
 import com.example.recargas.domain.model.Recarga;
-import com.example.recargas.domain.ports.RecargaHttpSaldo;
 import com.example.recargas.domain.ports.RecargaRabbitMQ;
 import com.example.recargas.domain.ports.PersonaRepository;
 import com.example.recargas.domain.ports.RecargaRepository;
+import com.example.recargas.domain.ports.RecargaSaldoHttp;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -36,7 +37,7 @@ class RecargaServiceTest {
     RecargaRepository recargaRepository;
 
     @Mock
-    RecargaHttpSaldo httpSaldo;
+    RecargaSaldoHttp httpSaldo;
 
     @Mock
     RecargaRabbitMQ recargaRabbitMQ;
