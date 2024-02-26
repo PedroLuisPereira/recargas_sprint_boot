@@ -55,7 +55,10 @@ public class RecargaService {
 
         recarga = recargaRepository.save(recarga);
 
-        recargaRabbitMQ.sendCompra(new CompraDto(recarga.getOperador(), recarga.getValor()));
+        /**
+         * Enviar a cola de rebbitMQ
+         */
+        //recargaRabbitMQ.sendCompra(new CompraDto(recarga.getOperador(), recarga.getValor()));
 
         return recarga;
 

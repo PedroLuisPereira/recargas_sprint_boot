@@ -8,6 +8,9 @@ import com.example.recargas.domain.model.Persona;
 
 public class PersonaTransformador {
 
+    private PersonaTransformador() {
+    }
+
     public static PersonaSolicitudCrear transformar(PersonaCrearDto personaCrearDto) {
         return new PersonaSolicitudCrear(
           personaCrearDto.getNombre(),

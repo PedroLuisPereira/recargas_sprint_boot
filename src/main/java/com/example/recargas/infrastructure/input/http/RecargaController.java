@@ -29,7 +29,7 @@ public class RecargaController {
 
     @PostMapping("/recargas")
     @ResponseStatus(HttpStatus.CREATED)
-    public RecargaRespuestaDto createPersona(@RequestBody RecargaCrearDto recargaCrearDto) {
+    public RecargaRespuestaDto createRecarga(@RequestBody RecargaCrearDto recargaCrearDto) {
         return recargaCrear.ejecutar(recargaCrearDto);
     }
 
